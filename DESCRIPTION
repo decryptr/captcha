@@ -25,3 +25,5 @@ Imports:
     magick,
     fs,
     usethis
+URL: https://github.com/decryptr/captcha
+BugReports: https://github.com/decryptr/captcha/issues
