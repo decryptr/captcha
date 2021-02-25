@@ -20,8 +20,14 @@
 #' @export
 classify <- function(files, answers = NULL, path = NULL, rm_old = FALSE, ...) {
 
+  if ("captcha" %in% class(files)) {
+    files <- files$path
+  }
+
   # Create directory if necessary
-  if (!is.null(path)) { dir.create(path, FALSE, TRUE) }
+  if (!is.null(path)) {
+    fs::dir_create(path)
+  }
 
   if (!is.null(answers)) {
 
@@ -30,36 +36,33 @@ classify <- function(files, answers = NULL, path = NULL, rm_old = FALSE, ...) {
 
     # Iterate over each captcha
     files <- purrr::map2_chr(
-      files, answers, classify_,
-      path = path, rm_old = rm_old, ...)
+      files, answers,
+      classify_,
+      path = path,
+      rm_old = rm_old,
+      ...
+    )
 
   } else {
 
     # Prompt for each captcha
     files <- purrr::map_chr(
-      files, classify_, ans = NULL,
-      path = path, rm_old = rm_old, ...)
+      files,
+      classify_,
+      ans = NULL,
+      path = path,
+      rm_old = rm_old,
+      ...
+    )
   }
 
   return(files)
 }
 
-#' Classify a captcha with its answer
-#'
-#' @param cap The path to a captcha
-#' @param ans Either `NULL` (for interactive classification) or
-#' a string with the answer for the captcha
-#' @param path Where to save the renamed (answered) captcha file
-#' (if `NULL`, will save file on the same folder as its unanswered
-#' counterpart)
-#' @param rm_old Whether or not to delete unanswered captcha after
-#' copying and renaming them
-#' @param ... Other arguments passed on to [read_captcha()]
-#'
 classify_ <- function(cap, ans, path, rm_old, ...) {
 
   # Read captcha
-  cap_ <- read_captcha(cap)[[1]]
+  cap_ <- read_captcha(cap)
 
   # If interactive, prompt for answer
   if (is.null(ans)) {
@@ -74,17 +77,18 @@ classify_ <- function(cap, ans, path, rm_old, ...) {
   }
 
   # Get information about where the file should be saved
-  file <- attr(cap_, "file")
-  name <- tools::file_path_sans_ext(basename(file))
-  ext <- tools::file_ext(basename(file))
-  path <- ifelse(is.null(path), dirname(file), normalizePath(path))
+  name <- tools::file_path_sans_ext(basename(cap))
+  ext <- tools::file_ext(basename(cap))
+  path <- ifelse(is.null(path), dirname(cap), normalizePath(path))
 
   # Build name of new file
-  new_file <- stringr::str_c(path, "/", name, "_", ans, ".", ext)
+  new_file <- stringr::str_glue("{path}/{name}_{ans}.{ext}")
 
   # Copy file to new address
-  file.copy(file, new_file, overwrite = TRUE)
-  if (rm_old) { file.remove(file) }
+  file.copy(cap, new_file, overwrite = TRUE)
+  if (rm_old) {
+    file.remove(cap)
+  }
 
   return(new_file)
 }

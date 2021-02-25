@@ -11,6 +11,26 @@ print.captcha <- function(x, ...) {
   print(x$img)
 }
 
+#' @export
+"[.captcha" <- function(x, i) {
+  stopifnot(is.numeric(i))
+  captcha_subset(x, i)
+}
+
+captcha_subset <- function(x, index) {
+  out <- list(
+    img = x$img[index],
+    lab = x$lab[index],
+    path = x$path[index]
+  )
+  class(out) <- "captcha"
+  out
+}
+
+length.captcha <- function(captcha) {
+  length(captcha$img)
+}
+
 #' Plot a captcha
 #'
 #' @param x Captcha object read with [read_captcha()]
@@ -55,17 +75,20 @@ plot.captcha <- function(x, y, ...) {
     )
   }
 
-  # res %>%
-  #   magick::image_border(color = "white", geometry = "5x5") %>%
-  #   magick::image_append(stack = TRUE)
-
-  img %>%
-    magick::image_border(color = "white", geometry = "5x5") %>%
-    magick::image_montage(
-      tile = stringr::str_glue("{columns}x{rows}"),
-      geometry = stringr::str_glue(
-        "{getOption('captcha.print.height')}x0+0+0"
-      )
-    )
-
+  op <- graphics::par(no.readonly = TRUE)
+  graphics::par(mar = rep(0, 4L))
+  if (length(img) > 1) {
+    img %>%
+      magick::image_border(color = "white", geometry = "5x5") %>%
+      magick::image_montage(
+        tile = stringr::str_glue("{columns}x{rows}"),
+        geometry = stringr::str_glue(
+          "{getOption('captcha.print.height')}x0+0+0"
+        )
+      ) %>%
+      graphics::plot()
+  } else {
+    graphics::plot(img)
+  }
+  graphics::par(op)
 }

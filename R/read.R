@@ -21,7 +21,8 @@ read_captcha <- function(files, ans_in_path = FALSE) {
   }
 
   # Iterate over files
-  out <- list(img = imgs, lab = labs)
+  out <- list(img = imgs, lab = labs, path = files)
+
   class(out) <- c("captcha")
   return(out)
 }
