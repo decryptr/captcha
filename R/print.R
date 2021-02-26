@@ -27,8 +27,9 @@ captcha_subset <- function(x, index) {
   out
 }
 
-length.captcha <- function(captcha) {
-  length(captcha$img)
+#' @export
+length.captcha <- function(x) {
+  length(x$img)
 }
 
 #' Plot a captcha
