@@ -4,16 +4,12 @@
 \alias{decrypt}
 \title{Funcao de resolver o captcha}
 \usage{
-decrypt(file, mm, vocab, dims = c(32L, 192L))
+decrypt(file, mm)
 }
 \arguments{
 \item{file}{arquivo para ler}
 
 \item{mm}{modelo}
-
-\item{vocab}{vocabulario (ou letras + numeros de vazio),}
-
-\item{dims}{dimensoes do pre processamento}
 }
 \description{
 Funcao de resolver o captcha

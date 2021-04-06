@@ -23,6 +23,7 @@ Imports:
     tools,
     magick,
     fs,
-    usethis
+    usethis,
+    torchvision
 URL: https://github.com/decryptr/captcha
 BugReports: https://github.com/decryptr/captcha/issues
