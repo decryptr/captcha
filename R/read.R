@@ -33,25 +33,3 @@ get_labels <- function(files) {
     stringr::str_extract("(?<=_)[0-9a-zA-Z]+")
 }
 
-# calcular_y <- function(x) {
-#   x %>%
-#     basename() %>%
-#     stringr::str_extract("(?<=_)[0-9a-zA-Z]+") %>%
-#     purrr::map(stringr::str_split, "") %>%
-#     purrr::map(~torch::torch_tensor(as.integer(.x[[1]]))) %>%
-#     # TODO generalizar esse 9 para algo calculado
-#     purrr::map(torch::nnf_one_hot, 9) %>%
-#     torch:::torch_stack()
-# }
-#
-#
-# calcular_x <- function(x, dims = c(32L, 192L)) {
-#   x %>%
-#     purrr::map(torchvision::base_loader) %>%
-#     purrr::map(torchvision::transform_to_tensor) %>%
-#     purrr::map(torchvision::transform_rgb_to_grayscale) %>%
-#     torch:::torch_stack() %>%
-#     torchvision::transform_resize(dims)
-# }
-#
-
