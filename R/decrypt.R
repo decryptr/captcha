@@ -8,6 +8,7 @@ decrypt <- function(file, mm) {
   vocab <- mm$parm$vocab
   dims <- mm$parm$input_dim
   mm$to(device = "cpu")
+  mm$eval()
   ans <- calcular_x(file, dims)$unsqueeze(1) %>%
     valid_transforms() %>%
     mm() %>%
