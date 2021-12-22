@@ -4,10 +4,21 @@
 \alias{net_captcha}
 \title{Net captcha}
 \usage{
-net_captcha(parm)
+net_captcha(
+  input_dim,
+  output_ndigits,
+  output_vocab_size,
+  dropout = c(0.25, 0.25)
+)
 }
 \arguments{
-\item{parm}{model parameters}
+\item{input_dim}{(integer, integer): image input dimensions.}
+
+\item{output_ndigits}{number of tokens for each Captcha.}
+
+\item{output_vocab_size}{number of unique token values.}
+
+\item{dropout}{(float, float) AlexNet dropout values.}
 }
 \description{
 Net captcha

@@ -19,8 +19,7 @@ calcular_x <- function(x, dims) {
     purrr::map(torchvision::base_loader) %>%
     purrr::map(torchvision::transform_to_tensor) %>%
     purrr::map(torchvision::transform_rgb_to_grayscale) %>%
-    torch::torch_stack() %>%
-    torchvision::transform_resize(dims)
+    torch::torch_stack()
 }
 
 #' Prepare image
@@ -91,31 +90,39 @@ calc_dim_img_one <- function(x, y) {
 
 #' Net captcha
 #'
-#' @param parm model parameters
+#' @param input_dim (integer, integer): image input dimensions.
+#' @param output_ndigits number of tokens for each Captcha.
+#' @param output_vocab_size number of unique token values.
+#' @param dropout (float, float) AlexNet dropout values.
+#' @param dense_units Number of dense units
 #'
 #' @export
 net_captcha <- torch::nn_module(
 
   "CAPTCHA-CNN",
 
-  initialize = function(parm) {
+  initialize = function(input_dim, output_ndigits, output_vocab_size,
+                        dropout = c(.25, .25),
+                        dense_units = 400) {
 
     # in_channels, out_channels, kernel_size, stride = 1, padding = 0
     self$conv1 <- torch::nn_conv2d(1, 32, 3)
     self$conv2 <- torch::nn_conv2d(32, 64, 3)
     self$conv3 <- torch::nn_conv2d(64, 64, 3)
-    self$dropout1 <- torch::nn_dropout2d(0.25)
-    self$dropout2 <- torch::nn_dropout2d(0.25)
+    self$dropout1 <- torch::nn_dropout2d(dropout[1])
+    self$dropout2 <- torch::nn_dropout2d(dropout[2])
     self$fc1 <- torch::nn_linear(
       # must be the same as last convnet
-      in_features = prod(calc_dim_conv(parm$input_dim)) * 64,
-      out_features = 400
+      in_features = prod(calc_dim_conv(input_dim)) * 64,
+      out_features = dense_units
     )
     self$fc2 <- torch::nn_linear(
-      in_features = 400,
-      out_features = parm$output_vocab_size * parm$output_ndigits
+      in_features = dense_units,
+      out_features = output_vocab_size * output_ndigits
     )
-    self$parm <- parm
+    self$output_vocab_size <- output_vocab_size
+    self$input_dim <- input_dim
+    self$output_ndigits <- output_ndigits
   },
 
   forward = function(x) {
@@ -145,7 +152,11 @@ net_captcha <- torch::nn_module(
       self$dropout2() %>%
       self$fc2()
 
-    out$view(c(dim(out)[1], parm$output_ndigits, parm$output_vocab_size))
+    out$view(c(
+      dim(out)[1],
+      self$output_ndigits,
+      self$output_vocab_size
+    ))
 
   }
 )
