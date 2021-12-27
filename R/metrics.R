@@ -10,7 +10,7 @@ captcha_accuracy <- luz::luz_metric(
   update = function(preds, target) {
     # browser()
     pred <- torch::torch_argmax(preds, dim = 3)
-    tgt <- torch::torch_argmax(target$squeeze(), dim = 3)
+    tgt <- torch::torch_argmax(target, dim = 3)
     # browser()
     new_correct <- (pred == tgt)$to(dtype = torch::torch_float())$sum()$item()
     self$correct <- self$correct + new_correct
