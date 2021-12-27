@@ -8,7 +8,9 @@ net_captcha(
   input_dim,
   output_ndigits,
   output_vocab_size,
-  dropout = c(0.25, 0.25)
+  vocab,
+  dropout = c(0.25, 0.25),
+  dense_units = 400
 )
 }
 \arguments{
@@ -18,7 +20,11 @@ net_captcha(
 
 \item{output_vocab_size}{number of unique token values.}
 
+\item{vocab}{token labels}
+
 \item{dropout}{(float, float) AlexNet dropout values.}
+
+\item{dense_units}{Number of dense units}
 }
 \description{
 Net captcha
