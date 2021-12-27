@@ -93,6 +93,7 @@ calc_dim_img_one <- function(x, y) {
 #' @param input_dim (integer, integer): image input dimensions.
 #' @param output_ndigits number of tokens for each Captcha.
 #' @param output_vocab_size number of unique token values.
+#' @param vocab token labels
 #' @param dropout (float, float) AlexNet dropout values.
 #' @param dense_units Number of dense units
 #'
@@ -101,7 +102,10 @@ net_captcha <- torch::nn_module(
 
   "CAPTCHA-CNN",
 
-  initialize = function(input_dim, output_ndigits, output_vocab_size,
+  initialize = function(input_dim,
+                        output_ndigits,
+                        output_vocab_size,
+                        vocab,
                         dropout = c(.25, .25),
                         dense_units = 400) {
 
@@ -123,6 +127,7 @@ net_captcha <- torch::nn_module(
     self$output_vocab_size <- output_vocab_size
     self$input_dim <- input_dim
     self$output_ndigits <- output_ndigits
+    self$vocab <- vocab
   },
 
   forward = function(x) {
@@ -145,8 +150,8 @@ net_captcha <- torch::nn_module(
       torch::nnf_max_pool2d(2) %>%
 
       # dense
-      self$dropout1() %>%
       torch::torch_flatten(start_dim = 2) %>%
+      self$dropout1() %>%
       self$fc1() %>%
       torch::nnf_relu() %>%
       self$dropout2() %>%
