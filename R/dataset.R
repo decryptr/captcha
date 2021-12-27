@@ -15,7 +15,8 @@ captcha_transform_image <- function(x) {
     purrr::map(torchvision::base_loader) %>%
     purrr::map(torchvision::transform_to_tensor) %>%
     purrr::map(torchvision::transform_rgb_to_grayscale) %>%
-    torch::torch_stack()
+    torch::torch_stack() %>%
+    torchvision::transform_normalize(mean = 0.5, std = 1)
 }
 
 #' File to response matrix (tensor)
@@ -156,8 +157,8 @@ captcha_dataset <- torch::dataset(
   },
   # returns a subset of indexed captchas
   .getitem = function(index) {
-    x <- self$data[index,,,drop = FALSE]
-    y <- self$target[index,,drop = FALSE]
+    x <- self$data[index,..,drop=FALSE]
+    y <- self$target[index,..]
     return(list(x = x, y = y))
   },
   # number of files
