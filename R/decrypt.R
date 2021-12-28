@@ -23,6 +23,6 @@ decrypt <- function(file, mm) {
   ind <- mm$model(transformed) |>
     torch::torch_argmax(3) |>
     as.matrix()
-  apply(ind, 1, \(x) paste(captcha_ds$vocab[x], collapse = ""))
+  apply(ind, 1, \(x) paste(mm$model$vocab[x], collapse = ""))
 }
 
