@@ -110,16 +110,22 @@ net_captcha <- torch::nn_module(
                         dense_units = 400) {
 
     # in_channels, out_channels, kernel_size, stride = 1, padding = 0
+    self$batchnorm0 <- torch::nn_batch_norm2d(1)
     self$conv1 <- torch::nn_conv2d(1, 32, 3)
+    self$batchnorm1 <- torch::nn_batch_norm2d(32)
     self$conv2 <- torch::nn_conv2d(32, 64, 3)
+    self$batchnorm2 <- torch::nn_batch_norm2d(64)
     self$conv3 <- torch::nn_conv2d(64, 64, 3)
+    self$batchnorm3 <- torch::nn_batch_norm2d(64)
     self$dropout1 <- torch::nn_dropout2d(dropout[1])
     self$dropout2 <- torch::nn_dropout2d(dropout[2])
+
     self$fc1 <- torch::nn_linear(
       # must be the same as last convnet
       in_features = prod(calc_dim_conv(input_dim)) * 64,
       out_features = dense_units
     )
+    self$batchnorm_dense <- torch::nn_batch_norm1d(dense_units)
     self$fc2 <- torch::nn_linear(
       in_features = dense_units,
       out_features = output_vocab_size * output_ndigits
@@ -134,26 +140,32 @@ net_captcha <- torch::nn_module(
 
     # x <- train_dl$.iter()$.next()$x
     out <- x %>%
+      # normalize
+      self$batchnorm0() %>%
       # layer 1
       self$conv1() %>%
       torch::nnf_relu() %>%
       torch::nnf_max_pool2d(2) %>%
+      self$batchnorm1() %>%
 
       # layer 2
       self$conv2() %>%
       torch::nnf_relu() %>%
       torch::nnf_max_pool2d(2) %>%
+      self$batchnorm2() %>%
 
       # layer 3
       self$conv3() %>%
       torch::nnf_relu() %>%
       torch::nnf_max_pool2d(2) %>%
+      self$batchnorm3() %>%
 
       # dense
       torch::torch_flatten(start_dim = 2) %>%
       self$dropout1() %>%
       self$fc1() %>%
       torch::nnf_relu() %>%
+      self$batchnorm_dense() %>%
       self$dropout2() %>%
       self$fc2()
 
