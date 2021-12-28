@@ -15,8 +15,7 @@ captcha_transform_image <- function(x) {
     purrr::map(torchvision::base_loader) %>%
     purrr::map(torchvision::transform_to_tensor) %>%
     purrr::map(torchvision::transform_rgb_to_grayscale) %>%
-    torch::torch_stack() %>%
-    torchvision::transform_normalize(mean = 0.5, std = 1)
+    torch::torch_stack()
 }
 
 #' File to response matrix (tensor)
@@ -66,6 +65,8 @@ captcha_data_url <- function() {
 #' @param in_memory (bool, optional) If `TRUE`, the default, loads
 #'   all the files in memory. If `FALSE`, it exports a data generator
 #'   function to read batches from disk.
+#' @param augmentation (function, optional) If not `NULL`, applies a
+#'   function to augment data with randomized preprocessing layers.
 #'
 #' @export
 captcha_dataset <- torch::dataset(
@@ -73,7 +74,8 @@ captcha_dataset <- torch::dataset(
   initialize = function(root, captcha, train = TRUE,
                         transform_image = captcha::captcha_transform_image,
                         transform_label = captcha::captcha_transform_label,
-                        download = FALSE, in_memory = TRUE) {
+                        download = FALSE, in_memory = TRUE,
+                        augmentation = NULL) {
 
     ## parameter checks
     if (download && missing(captcha)) {
@@ -121,6 +123,7 @@ captcha_dataset <- torch::dataset(
     self$data <- x
     self$target <- y
     self$vocab <- vocab
+    self$augmentation <- augmentation
 
   },
 
@@ -157,7 +160,13 @@ captcha_dataset <- torch::dataset(
   },
   # returns a subset of indexed captchas
   .getitem = function(index) {
+
     x <- self$data[index,..,drop=FALSE]
+
+    if (!is.null(self$augmentation)) {
+      x <- self$augmentation(x)
+    }
+
     y <- self$target[index,..]
     return(list(x = x, y = y))
   },
