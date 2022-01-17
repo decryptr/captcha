@@ -9,6 +9,7 @@ net_captcha(
   output_ndigits,
   output_vocab_size,
   vocab,
+  transform,
   dropout = c(0.25, 0.25),
   dense_units = 400
 )
@@ -21,6 +22,8 @@ net_captcha(
 \item{output_vocab_size}{number of unique token values.}
 
 \item{vocab}{token labels}
+
+\item{transform}{input transform function (for prediction purposes)}
 
 \item{dropout}{(float, float) AlexNet dropout values.}
 

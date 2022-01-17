@@ -11,7 +11,8 @@ captcha_dataset(
   transform_image = captcha::captcha_transform_image,
   transform_label = captcha::captcha_transform_label,
   download = FALSE,
-  in_memory = TRUE
+  in_memory = TRUE,
+  augmentation = NULL
 )
 }
 \arguments{
@@ -38,6 +39,9 @@ downloaded, it is not downloaded again. Defaults to \code{FALSE}}
 \item{in_memory}{(bool, optional) If \code{TRUE}, the default, loads
 all the files in memory. If \code{FALSE}, it exports a data generator
 function to read batches from disk.}
+
+\item{augmentation}{(function, optional) If not \code{NULL}, applies a
+function to augment data with randomized preprocessing layers.}
 }
 \description{
 Captcha datasets

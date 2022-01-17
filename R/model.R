@@ -94,6 +94,7 @@ calc_dim_img_one <- function(x, y) {
 #' @param output_ndigits number of tokens for each Captcha.
 #' @param output_vocab_size number of unique token values.
 #' @param vocab token labels
+#' @param transform input transform function (for prediction purposes)
 #' @param dropout (float, float) AlexNet dropout values.
 #' @param dense_units Number of dense units
 #'
@@ -106,6 +107,7 @@ net_captcha <- torch::nn_module(
                         output_ndigits,
                         output_vocab_size,
                         vocab,
+                        transform,
                         dropout = c(.25, .25),
                         dense_units = 400) {
 
@@ -134,6 +136,7 @@ net_captcha <- torch::nn_module(
     self$input_dim <- input_dim
     self$output_ndigits <- output_ndigits
     self$vocab <- vocab
+    self$transform <- transform
   },
 
   forward = function(x) {

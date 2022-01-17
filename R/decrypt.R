@@ -19,10 +19,10 @@ decrypt <- function(file, mm) {
   #   collapse = ""
   # )
   mm$model$eval()
-  transformed <- captcha_transform_image(file)$unsqueeze(2)
-  ind <- mm$model(transformed) |>
-    torch::torch_argmax(3) |>
+  transformed <- mm$model$transform(file)$unsqueeze(2)
+  ind <- mm$model(transformed) %>%
+    torch::torch_argmax(3) %>%
     as.matrix()
-  apply(ind, 1, \(x) paste(mm$model$vocab[x], collapse = ""))
+  apply(ind, 1, function(x) paste(mm$model$vocab[x], collapse = ""))
 }
 

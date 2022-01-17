@@ -123,6 +123,7 @@ captcha_dataset <- torch::dataset(
     self$data <- x
     self$target <- y
     self$vocab <- vocab
+    self$transform <- transform_image
     self$augmentation <- augmentation
 
   },
