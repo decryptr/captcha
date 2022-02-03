@@ -112,8 +112,8 @@ net_captcha <- torch::nn_module(
                         dense_units = 400) {
 
     # in_channels, out_channels, kernel_size, stride = 1, padding = 0
-    self$batchnorm0 <- torch::nn_batch_norm2d(1)
-    self$conv1 <- torch::nn_conv2d(1, 32, 3)
+    self$batchnorm0 <- torch::nn_batch_norm2d(3)
+    self$conv1 <- torch::nn_conv2d(3, 32, 3)
     self$batchnorm1 <- torch::nn_batch_norm2d(32)
     self$conv2 <- torch::nn_conv2d(32, 64, 3)
     self$batchnorm2 <- torch::nn_batch_norm2d(64)
@@ -141,7 +141,8 @@ net_captcha <- torch::nn_module(
 
   forward = function(x) {
 
-    # x <- train_dl$.iter()$.next()$x
+    # x <- captcha_dl_train$.iter()$.next()$x
+    # browser()
     out <- x %>%
       # normalize
       self$batchnorm0() %>%
