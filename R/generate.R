@@ -43,21 +43,22 @@ captcha_generate <- function(write_disk = FALSE,
 
 
   gravity <- c(
-    "Center",
-    "East",
+    "Center"#,
+    # "East",
     # "NorthEast",
     # "North",
     # "NorthWest",
     # "SouthEast",
-    "South",
+    # "South",
     # "SouthWest",
-    "West"
+    # "West"
   )
   fonts <- c(
     "sans", "mono", "serif", "Times", "Helvetica",
     "Trebuchet", "Georgia", "Palatino", "Comic Sans"
   )
-  size <- ceiling(n_rows * n_cols / 300)
+
+  size <- ceiling(n_rows * n_cols / 200)
 
   captcha_chars <- sample(chars, n_chars, replace = TRUE)
   captcha_value <- paste(captcha_chars, collapse = "")
@@ -67,7 +68,7 @@ captcha_generate <- function(write_disk = FALSE,
   background_pix <- rep(background_cols, each = n_rows * n_cols)
   m <- array(background_pix, dim = c(n_rows, n_cols, 3))
   m <- m + rand
-  m1 <- magick::image_read(m)
+  m_bg <- magick::image_read(m)
 
   # text color can't be too close to background color
   txt_col <- sample(grDevices::colors(), 1)
@@ -93,13 +94,13 @@ captcha_generate <- function(write_disk = FALSE,
     box_color <- "none"
   }
 
-  m2 <- magick::image_annotate(
-    m1,
+  m_text <- magick::image_annotate(
+    magick::image_blank(n_cols * 5, n_rows * 5),
     text = captcha_value,
     size = sample(seq(size - 2, size + 2), 1),
     gravity = sample(gravity, 1),
     color = txt_col,
-    degrees = ifelse(runif(1) < p_rotate, sample(seq(-10,10), 1), 0),
+    degrees = ifelse(runif(1) < p_rotate, sample(seq(-10, 10), 1), 0),
     weight = sample(seq(400, 800), 1),
     kerning = sample(seq(-2, 10), 1),
     font = sample(fonts, 1),
@@ -111,20 +112,22 @@ captcha_generate <- function(write_disk = FALSE,
       "none"
     ),
     boxcolor = box_color
-  )
-  m2
+  ) %>%
+    magick::image_trim() %>%
+    magick::image_resize(stringr::str_glue("{n_cols}x{n_rows}"))
+
 
 
   if (runif(1) < p_implode) {
-    m2 <- magick::image_implode(m2, factor = runif(1, 0, .4))
+    m_text <- magick::image_implode(m_text, factor = runif(1, 0, .4))
   }
   if (runif(1) < p_oilpaint) {
-    m2 <- magick::image_oilpaint(m2, radius = 1.5)
+    m_text <- magick::image_oilpaint(m_text, radius = 1.5)
   }
   if (runif(1) < p_noise) {
     ## too much noise
     # ntype <- sample(setdiff(magick::noise_types(), "Random"), 1)
-    m2 <- magick::image_noise(m2, "Gaussian")
+    m_text <- magick::image_noise(m_text, "Gaussian")
   }
   if (runif(1) < p_lat) {
     lat_geo <- paste0(
@@ -132,11 +135,18 @@ captcha_generate <- function(write_disk = FALSE,
       sample(seq(0,10), 1), "+",
       sample(seq(0,10), 1), "%"
     )
-    m2 <- magick::image_lat(m2, geometry = lat_geo)
+    m_text <- magick::image_lat(m_text, geometry = lat_geo)
   }
 
+
+  m_complete <- magick::image_composite(
+    m_bg, m_text,
+    operator = "Atop",
+    gravity = "center"
+  )
+
   result <- list(
-    image = m2,
+    image = m_complete,
     captcha = captcha_value
   )
 
@@ -147,7 +157,7 @@ captcha_generate <- function(write_disk = FALSE,
       ext = ".png",
       pattern = "captcha"
     )
-    magick::image_write(m2, f_captcha)
+    magick::image_write(m_complete, f_captcha)
     f_classify <- classify(f_captcha, tolower(captcha_value), rm_old = TRUE)
     result$file <- f_classify
   }
