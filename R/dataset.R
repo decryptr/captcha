@@ -14,9 +14,26 @@ captcha_transform_image <- function(x) {
   x %>%
     purrr::map(torchvision::base_loader) %>%
     purrr::map(torchvision::transform_to_tensor) %>%
-    purrr::map(torchvision::transform_rgb_to_grayscale) %>%
+    purrr::map(adjust_dimensions) %>%
     torch::torch_stack()
 }
+
+to_gray <- function(img) {
+  if (dim(img)[1] >= 3) {
+    torchvision::transform_rgb_to_grayscale(img)
+  } else {
+    img[1]
+  }
+}
+
+adjust_dimensions <- function(img) {
+  if (dim(img)[1] >= 3) {
+    img[1:3]
+  } else {
+    torch::torch_stack(list(img[1], img[1], img[1]))
+  }
+}
+
 
 #' File to response matrix (tensor)
 #'
@@ -162,7 +179,7 @@ captcha_dataset <- torch::dataset(
   # returns a subset of indexed captchas
   .getitem = function(index) {
 
-    x <- self$data[index,..,drop=FALSE]
+    x <- self$data[index,..,drop=TRUE]
 
     if (!is.null(self$augmentation)) {
       x <- self$augmentation(x)
