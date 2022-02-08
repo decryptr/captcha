@@ -10,11 +10,12 @@ available_captchas <- function() {
 #' @param x file path
 #'
 #' @export
-captcha_transform_image <- function(x) {
+captcha_transform_image <- function(x, input_dim = c(32L, 192L)) {
   x %>%
     purrr::map(torchvision::base_loader) %>%
     purrr::map(torchvision::transform_to_tensor) %>%
     purrr::map(adjust_dimensions) %>%
+    purrr::map(torchvision::transform_resize, input_dim) %>%
     torch::torch_stack()
 }
 
