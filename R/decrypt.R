@@ -5,21 +5,8 @@
 #'
 #' @export
 decrypt <- function(file, mm) {
-  # vocab <- mm$parm$vocab
-  # dims <- mm$parm$input_dim
-  # mm$to(device = "cpu")
-  # mm$eval()
-  # ans <- calcular_x(file, dims)$unsqueeze(1) %>%
-  #   valid_transforms() %>%
-  #   mm() %>%
-  #   torch::torch_max(dim = 3) %>%
-  #   purrr::pluck(2)
-  # paste(
-  #   vocab[as.numeric(ans$to(device = "cpu"))],
-  #   collapse = ""
-  # )
   mm$model$eval()
-  transformed <- mm$model$transform(file)$unsqueeze(2)
+  transformed <- mm$model$transform(file)
   ind <- mm$model(transformed) %>%
     torch::torch_argmax(3) %>%
     as.matrix()
