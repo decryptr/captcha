@@ -4,3 +4,5 @@
 .httr-oauth
 .DS_Store
 inst/example.R
+data-raw/*
+!data-raw/trt.R
