@@ -29,10 +29,14 @@ to_gray <- function(img) {
 
 adjust_dimensions <- function(img) {
   if (dim(img)[1] >= 3) {
-    img[1:3]
+    img_adj <- img[1:3]
+    if (all(as.numeric(img_adj) == 0) && dim(img)[1] == 4) {
+      img_adj <- torch::torch_stack(list(img[4], img[4], img[4]))
+    }
   } else {
-    torch::torch_stack(list(img[1], img[1], img[1]))
+    img_adj <- torch::torch_stack(list(img[1], img[1], img[1]))
   }
+  img_adj
 }
 
 
@@ -179,6 +183,7 @@ captcha_dataset <- torch::dataset(
   },
   # returns a subset of indexed captchas
   .getitem = function(index) {
+    # browser()
 
     x <- self$data[index,..,drop=TRUE]
 
