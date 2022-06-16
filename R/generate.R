@@ -112,8 +112,8 @@ captcha_generate <- function(write_disk = FALSE,
       "none"
     ),
     boxcolor = box_color
-  ) %>%
-    magick::image_trim() %>%
+  ) |>
+    magick::image_trim() |>
     magick::image_resize(stringr::str_glue("{n_cols}x{n_rows}"))
 
 

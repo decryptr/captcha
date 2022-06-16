@@ -28,8 +28,8 @@ read_captcha <- function(files, ans_in_path = FALSE) {
 }
 
 get_labels <- function(files) {
-  files %>%
-    basename() %>%
+  files |>
+    basename() |>
     stringr::str_extract("(?<=_)[0-9a-zA-Z]+")
 }
 

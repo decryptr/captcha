@@ -1,24 +1,24 @@
 calcular_y <- function(x, dim) {
-  all_letters <- x %>%
-    basename() %>%
-    stringr::str_extract("(?<=_)[0-9a-zA-Z]+") %>%
+  all_letters <- x |>
+    basename() |>
+    stringr::str_extract("(?<=_)[0-9a-zA-Z]+") |>
     purrr::map(stringr::str_split, "")
 
   vocab <- sort(unique(unlist(all_letters)))
 
-  all_letters %>%
+  all_letters |>
     purrr::map(~{
       torch::torch_tensor(as.integer(factor(.x[[1]], levels = vocab)))
-    }) %>%
-    purrr::map(torch::nnf_one_hot, dim) %>%
+    }) |>
+    purrr::map(torch::nnf_one_hot, dim) |>
     torch::torch_stack()
 }
 
 calcular_x <- function(x, dims) {
-  x %>%
-    purrr::map(torchvision::base_loader) %>%
-    purrr::map(torchvision::transform_to_tensor) %>%
-    purrr::map(torchvision::transform_rgb_to_grayscale) %>%
+  x |>
+    purrr::map(torchvision::base_loader) |>
+    purrr::map(torchvision::transform_to_tensor) |>
+    purrr::map(torchvision::transform_rgb_to_grayscale) |>
     torch::torch_stack()
 }
 
@@ -29,12 +29,12 @@ calcular_x <- function(x, dims) {
 #'
 #' @export
 train_transforms <- function(img) {
-  img %>%
+  img |>
     # torchvision::transform_random_resized_crop(
     #   c(32L, 192L), scale = c(1, 1), ratio = c(1, 1),
     #   interpolation = 0L
-    # ) %>%
-    torchvision::transform_color_jitter() %>%
+    # ) |>
+    torchvision::transform_color_jitter() |>
     torchvision::transform_normalize(mean = .5, std = .2)
 }
 
@@ -44,7 +44,7 @@ train_transforms <- function(img) {
 #'
 #' @export
 valid_transforms <- function(img) {
-  img %>%
+  img |>
     torchvision::transform_normalize(mean = .5, std = .2)
 }
 
@@ -143,34 +143,34 @@ net_captcha <- torch::nn_module(
 
     # x <- captcha_dl_train$.iter()$.next()$x
     # browser()
-    out <- x %>%
+    out <- x |>
       # normalize
-      self$batchnorm0() %>%
+      self$batchnorm0() |>
       # layer 1
-      self$conv1() %>%
-      torch::nnf_relu() %>%
-      torch::nnf_max_pool2d(2) %>%
-      self$batchnorm1() %>%
+      self$conv1() |>
+      torch::nnf_relu() |>
+      torch::nnf_max_pool2d(2) |>
+      self$batchnorm1() |>
 
       # layer 2
-      self$conv2() %>%
-      torch::nnf_relu() %>%
-      torch::nnf_max_pool2d(2) %>%
-      self$batchnorm2() %>%
+      self$conv2() |>
+      torch::nnf_relu() |>
+      torch::nnf_max_pool2d(2) |>
+      self$batchnorm2() |>
 
       # layer 3
-      self$conv3() %>%
-      torch::nnf_relu() %>%
-      torch::nnf_max_pool2d(2) %>%
-      self$batchnorm3() %>%
+      self$conv3() |>
+      torch::nnf_relu() |>
+      torch::nnf_max_pool2d(2) |>
+      self$batchnorm3() |>
 
       # dense
-      torch::torch_flatten(start_dim = 2) %>%
-      self$dropout1() %>%
-      self$fc1() %>%
-      torch::nnf_relu() %>%
-      self$batchnorm_dense() %>%
-      self$dropout2() %>%
+      torch::torch_flatten(start_dim = 2) |>
+      self$dropout1() |>
+      self$fc1() |>
+      torch::nnf_relu() |>
+      self$batchnorm_dense() |>
+      self$dropout2() |>
       self$fc2()
 
     out$view(c(

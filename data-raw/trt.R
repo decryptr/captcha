@@ -51,12 +51,12 @@ model <- captcha::net_captcha
 
 # run model ---------------------------------------------------------------
 
-fitted <- model %>%
+fitted <- model |>
   luz::setup(
     loss = torch::nn_multilabel_soft_margin_loss(),
     optimizer = torch::optim_adam,
     metrics = list(captcha::captcha_accuracy())
-  ) %>%
+  ) |>
   luz::set_hparams(
     input_dim = dim(captcha_ds_train$data)[c(3,4)],
     output_vocab_size = dim(captcha_ds_train$target)[3],
@@ -65,10 +65,10 @@ fitted <- model %>%
     transform = captcha_ds_train$transform,
     dropout = c(0.3, 0.3),
     dense_units = 200
-  ) %>%
+  ) |>
   luz::set_opt_hparams(
     lr = .01
-  ) %>%
+  ) |>
   luz::fit(
     captcha_dl_train,
     valid_data = captcha_dl_valid,

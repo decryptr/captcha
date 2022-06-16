@@ -11,11 +11,11 @@ available_captchas <- function() {
 #'
 #' @export
 captcha_transform_image <- function(x, input_dim = c(32L, 192L)) {
-  x %>%
-    purrr::map(torchvision::base_loader) %>%
-    purrr::map(torchvision::transform_to_tensor) %>%
-    purrr::map(adjust_dimensions) %>%
-    purrr::map(torchvision::transform_resize, input_dim) %>%
+  x |>
+    purrr::map(torchvision::base_loader) |>
+    purrr::map(torchvision::transform_to_tensor) |>
+    purrr::map(adjust_dimensions) |>
+    purrr::map(torchvision::transform_resize, input_dim) |>
     torch::torch_stack()
 }
 
@@ -49,11 +49,11 @@ adjust_dimensions <- function(img) {
 captcha_transform_label <- function(all_letters, vocab) {
 
 
-  all_letters %>%
+  all_letters |>
     purrr::map(~{
       torch::torch_tensor(as.integer(factor(.x[[1]], levels = vocab)))
-    }) %>%
-    purrr::map(torch::nnf_one_hot, length(vocab)) %>%
+    }) |>
+    purrr::map(torch::nnf_one_hot, length(vocab)) |>
     torch::torch_stack()
 }
 
@@ -126,10 +126,10 @@ captcha_dataset <- torch::dataset(
       files <- fs::dir_ls(root, recurse = TRUE, type = "file")
       self$files <- files
 
-      all_letters <- files %>%
-        basename() %>%
-        tools::file_path_sans_ext() %>%
-        stringr::str_extract("(?<=_)[0-9a-zA-Z]+") %>%
+      all_letters <- files |>
+        basename() |>
+        tools::file_path_sans_ext() |>
+        stringr::str_extract("(?<=_)[0-9a-zA-Z]+") |>
         purrr::map(stringr::str_split, "")
 
       vocab <- sort(unique(unlist(all_letters)))

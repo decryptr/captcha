@@ -4,7 +4,7 @@
 \alias{captcha_transform_image}
 \title{File to torch tensor}
 \usage{
-captcha_transform_image(x)
+captcha_transform_image(x, input_dim = c(32L, 192L))
 }
 \arguments{
 \item{x}{file path}
