@@ -21,7 +21,7 @@ captcha_load_model <- function(captcha) {
     path <- captcha
   } else {
     tmp <- fs::file_temp("model", ext = "pt")
-    download.file(captcha_url, tmp)
+    utils::download.file(captcha_url, tmp)
     path <- tmp
   }
 

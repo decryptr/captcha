@@ -8,6 +8,8 @@ captcha_transform_image(x, input_dim = c(32L, 192L))
 }
 \arguments{
 \item{x}{file path}
+
+\item{input_dim}{resize image to dimension}
 }
 \description{
 File to torch tensor

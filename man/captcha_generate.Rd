@@ -47,7 +47,7 @@ case letters and numbers}
 
 \item{p_noise}{probability to add random noise to image. Defaults to 40\%.}
 
-\item{p_pat}{probability to add LAT algorithm to image. Defaults to 0.}
+\item{p_lat}{probability to add LAT algorithm to image. Defaults to 0.}
 }
 \value{
 list containing two elements: imagemagick object and captcha

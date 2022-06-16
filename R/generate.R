@@ -15,7 +15,7 @@
 #' @param p_implode probability to add imploding effect. Defaults to 20%.
 #' @param p_oilpaint probability to add oilpaint effect. Defaults to 0.
 #' @param p_noise probability to add random noise to image. Defaults to 40%.
-#' @param p_pat probability to add LAT algorithm to image. Defaults to 0.
+#' @param p_lat probability to add LAT algorithm to image. Defaults to 0.
 #'
 #' @return list containing two elements: imagemagick object and captcha
 #'   value.
@@ -63,7 +63,7 @@ captcha_generate <- function(write_disk = FALSE,
   captcha_chars <- sample(chars, n_chars, replace = TRUE)
   captcha_value <- paste(captcha_chars, collapse = "")
 
-  rand <- runif(n_rows * n_cols * 3, min = 0, max = .3)
+  rand <- stats::runif(n_rows * n_cols * 3, min = 0, max = .3)
   background_cols <- grDevices::col2rgb(sample(grDevices::colors(), 1)) / 255
   background_pix <- rep(background_cols, each = n_rows * n_cols)
   m <- array(background_pix, dim = c(n_rows, n_cols, 3))
@@ -80,7 +80,7 @@ captcha_generate <- function(write_disk = FALSE,
     dist_col <- sum((txt_col_rgb - background_cols)^2)
   }
 
-  if (runif(1) < p_box) {
+  if (stats::runif(1) < p_box) {
     # box color can't be too close to text color
     box_color <- sample(grDevices::colors(), 1)
     box_color_rgb <- grDevices::col2rgb(box_color) / 255
@@ -100,14 +100,14 @@ captcha_generate <- function(write_disk = FALSE,
     size = sample(seq(size - 2, size + 2), 1),
     gravity = sample(gravity, 1),
     color = txt_col,
-    degrees = ifelse(runif(1) < p_rotate, sample(seq(-10, 10), 1), 0),
+    degrees = ifelse(stats::runif(1) < p_rotate, sample(seq(-10, 10), 1), 0),
     weight = sample(seq(400, 800), 1),
     kerning = sample(seq(-2, 10), 1),
     font = sample(fonts, 1),
     style = sample(magick::style_types(), 1),
-    decoration = ifelse(runif(1) < p_line, "LineThrough", "None"),
+    decoration = ifelse(stats::runif(1) < p_line, "LineThrough", "None"),
     strokecolor = ifelse(
-      runif(1) < p_stroke,
+      stats::runif(1) < p_stroke,
       sample(grDevices::colors(), 1),
       "none"
     ),
@@ -118,18 +118,18 @@ captcha_generate <- function(write_disk = FALSE,
 
 
 
-  if (runif(1) < p_implode) {
-    m_text <- magick::image_implode(m_text, factor = runif(1, 0, .4))
+  if (stats::runif(1) < p_implode) {
+    m_text <- magick::image_implode(m_text, factor = stats::runif(1, 0, .4))
   }
-  if (runif(1) < p_oilpaint) {
+  if (stats::runif(1) < p_oilpaint) {
     m_text <- magick::image_oilpaint(m_text, radius = 1.5)
   }
-  if (runif(1) < p_noise) {
+  if (stats::runif(1) < p_noise) {
     ## too much noise
     # ntype <- sample(setdiff(magick::noise_types(), "Random"), 1)
     m_text <- magick::image_noise(m_text, "Gaussian")
   }
-  if (runif(1) < p_lat) {
+  if (stats::runif(1) < p_lat) {
     lat_geo <- paste0(
       sample(seq(0,10), 1), "x",
       sample(seq(0,10), 1), "+",

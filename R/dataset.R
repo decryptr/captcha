@@ -8,6 +8,7 @@ available_captchas <- function() {
 #' File to torch tensor
 #'
 #' @param x file path
+#' @param input_dim resize image to dimension
 #'
 #' @export
 captcha_transform_image <- function(x, input_dim = c(32L, 192L)) {

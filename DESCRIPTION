@@ -24,6 +24,8 @@ Imports:
     fs,
     usethis,
     torchvision,
-    luz
+    luz,
+    R6,
+    rlang
 URL: https://github.com/decryptr/captcha
 BugReports: https://github.com/decryptr/captcha/issues
