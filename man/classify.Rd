@@ -4,7 +4,7 @@
 \alias{classify}
 \title{Classify captchas with their answers}
 \usage{
-classify(files, answers = NULL, path = NULL, rm_old = FALSE, ...)
+classify(files, answers = NULL, path = NULL, rm_old = FALSE)
 }
 \arguments{
 \item{files}{A vector with the paths to captcha files}
@@ -18,8 +18,6 @@ counterpart)}
 
 \item{rm_old}{Whether or not to delete unanswered captchas after
 copying and renaming them}
-
-\item{...}{Other arguments passed on to \code{\link[=read_captcha]{read_captcha()}}}
 }
 \value{
 A vector with the paths to the newly created files
