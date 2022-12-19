@@ -7,7 +7,7 @@
 decrypt(files, model)
 }
 \arguments{
-\item{files}{files to read}
+\item{files}{files to read. Can be a character vector or an object of class \code{captcha}.}
 
 \item{model}{model of class \code{luz_module_fitted}}
 }

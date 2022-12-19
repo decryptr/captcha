@@ -12,7 +12,7 @@ Available models for prediction using \url{decrypt()}.
 \details{
 Currently, available captchas are:
 
-\enumerate{
+\itemize{
 \item \href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5}: Tribunal Regional Federal 5
 \item \href{https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&numero=1&listaProcessos=50718889720218130024&btn_pesquisar=Pesquisar}{tjmg}: Tribunal de Justiça de Minas Gerais
 \item \href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}: Tribunal Regional do Trabalho 3
