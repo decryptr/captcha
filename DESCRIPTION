@@ -26,6 +26,7 @@ Imports:
     torchvision,
     luz,
     R6,
-    rlang
+    rlang,
+    piggyback
 URL: https://github.com/decryptr/captcha
 BugReports: https://github.com/decryptr/captcha/issues
