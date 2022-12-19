@@ -1,7 +1,8 @@
-f_captcha <- fs::dir_ls("img")
+# Classify captchas -------------------------------------------------------
 
-# Option 1: classify manually
-captcha::classify(f_captcha, "img_train")
+# load captchas
+img_path <- "img"
+f_captcha <- fs::dir_ls(img_path)
 
-# Option 2: shiny app
-captcha::classify_app(f_captcha, "img_train")
+captcha::classify(f_captcha, img_path)
+

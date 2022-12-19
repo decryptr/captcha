@@ -1,9 +1,12 @@
+# download functions ------------------------------------------------------
+
 # Write the script to download captcha files
 
 download_captcha <- function(n = 1, path = "img", ext = NULL) {
 
+  fs::dir_create(path)
   if (is.null(ext)) ext <- ".png"
-  purrr::map_chr(seq_len(n), ~download_captcha_one(path, ext))
+  purrr::map_chr(seq_len(n), \(x) download_captcha_one(path, ext))
 
 }
 
@@ -21,3 +24,9 @@ download_captcha_one <- function(path, ext) {
 
   f_captcha
 }
+
+# execute download --------------------------------------------------------
+
+img_path <- "img"
+
+f_captcha <- download_captcha(n = 1200, img_path)

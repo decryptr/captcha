@@ -1,79 +1,122 @@
-library(magrittr)
+# parameter handling ------------------------------------------------------
 
-# EDIT HERE
+# Edit parameters here
 parm <- list(
-  input_dim = c(32L, 192L),
-  output_vocab_size = 10L,
-  vocab = 0:9,
-  output_ndigits = 4L,
-  path_files = "img",
-  n_train = 3800L,
-  batch_size = 32L,
-  n_epochs = 15L
+  # Captcha parameters
+  captcha_name = "my_captcha",  # Captcha name
+  input_dim = c(32L, 192L),     # Resize Captcha images. Usually we don't change this
+  output_vocab_size = 10L,      # Size of the vocabulary
+  vocab = 0:9,                  # Character vector with the vocabulary
+  output_ndigits = 4L,          # Length of the Captcha images
+
+  # Data parameters
+  path_img = "img",             # Path of all images (training and validation)
+  n_train = 1000L,              # How many images to consider for training
+  batch_size = 40L,             # Minibatch size
+
+  # Model parameters
+  n_epochs = 100L,              # Number of epochs
+  dense_units = 200L,           # Number of dense units to use after convolution steps.
+  dropout = c(0.25, 0.25),      # Dropout hyperparameter applied after convolution steps.
+  decay = 0.99,                 # Weight decay applied each epoch
+  learning_rate = .01,          # Learning rate
+
+  # Control parameters
+  early_stop_min_delta = .01,   # Minimum change to reset early stopping
+  early_stop_patience = 20,     # Number of epochs to check early stopping
+  path_log = "model_log.csv",   # Path to save csv logs
+  path_training = "f_train.txt" # Save list of files used for training
 )
 
 # data prep ---------------------------------------------------------------
 
-files <- fs::dir_ls(parm$path_files)
+f_captcha <- fs::dir_ls(parm$path_img)
+
+# Here we select the files used for training and validation.
+# We choose them randomly. For reproducibility, one can set the pseudo-random
+# seed using set.seet()
+
 # set.seed(101)
-i_train <- sort(sample(seq_along(files), parm$n_train))
-f_train <- files[i_train]
-f_test <- files[-i_train]
+ids <- seq_along(captcha_ds)
+id_train <- sample(ids, parm$n_train)
+id_valid <- setdiff(ids, id_train)
+
+# save training files for reproducibility
+f_train <- f_captcha[id_train]
+readr::write_lines(f_train, parm$path_training)
+
+# Dataset and dataloader --------------------------------------------------
 
 # datasets
-train_ds <- captcha::captcha_ds_in_memory(
-  files = f_train,
-  dims = parm$input_dim,
-  output_dim = parm$output_vocab_size,
-  transform = captcha::train_transforms
-)
-test_ds <- captcha::captcha_ds_in_memory(
-  files = f_test,
-  dims = parm$input_dim,
-  output_dim = parm$output_vocab_size,
-  transform = captcha::valid_transforms
+captcha_ds <- captcha::captcha_dataset(
+  root = parm$path_img,
+  captcha = NULL,
+  download = FALSE
 )
 
-# data loaders
-train_dl <- torch::dataloader(
-  dataset = train_ds,
+# dataloaders (training and validation)
+captcha_dl_train <- torch::dataloader(
+  dataset = torch::dataset_subset(captcha_ds, id_train),
   batch_size = parm$batch_size,
   shuffle = TRUE
 )
-test_dl <- torch::dataloader(
-  dataset = test_ds,
-  batch_size = parm$batch_size,
-  drop_last = TRUE
+
+captcha_dl_valid <- torch::dataloader(
+  dataset = torch::dataset_subset(captcha_ds, id_valid),
+  batch_size = parm$batch_size
 )
 
-model <- captcha::net_captcha(parm)$to(device = "cuda")
-optimizer <- torch::optim_adam(model$parameters, lr = 0.001)
+# model -------------------------------------------------------------------
 
-for (epoch in seq_len(parm$n_epochs)) {
+# The net_captcha module contains the model defined inside the {captcha} package.
+# One can create custom models from this description
+# Code here: https://github.com/decryptr/captcha/blob/master/R/model.R#L91
 
-  p <- progress::progress_bar$new(total = length(train_dl))
+model <- captcha::net_captcha
 
-  # train step
-  train_metrics <- list(total = 0, correct = 0)
-  model$train()
-  coro::loop(for (b in train_dl) {
-    p$tick()
-    res_train <- captcha::train_step(b, model, optimizer)
-    train_metrics <- captcha::update_train_metrics(train_metrics, res_train)
-  })
+# {luz} workflow ----------------------------------------------------------
 
-  # test step
-  valid_metrics <- list(loss = c(), total = 0, correct = 0)
-  model$eval()
-  coro::loop(for (b in test_dl) {
-    res_valid <- captcha::valid_step(b, model)
-    valid_metrics <- captcha::update_valid_metrics(valid_metrics, res_valid)
-  })
+fitted <- model |>
+  # Set loss, optimizer and metrics
+  luz::setup(
+    loss = torch::nn_multilabel_soft_margin_loss(),
+    optimizer = torch::optim_adam,
+    metrics = list(captcha::captcha_accuracy())
+  ) |>
+  # Set hyperparameters
+  luz::set_hparams(
+    input_dim = dim(captcha_ds$data)[c(3,4)],
+    output_vocab_size = dim(captcha_ds$target)[3],
+    output_ndigits = dim(captcha_ds$target)[2],
+    vocab = captcha_ds$vocab,
+    transform = captcha_ds$transform,
+    dropout = parm$dropout,
+    dense_units = parm$dense_units
+  ) |>
+  # Set optimizer hyperparameters
+  luz::set_opt_hparams(lr = parm$learning_rate) |>
+  # Set dataloaders and callbacks
+  luz::fit(
+    captcha_dl_train,
+    valid_data = captcha_dl_valid,
+    epochs = parm$n_epochs,
+    callbacks = list(
+      luz::luz_callback_lr_scheduler(
+        torch::lr_multiplicative,
+        lr_lambda = function(x) parm$decay
+      ),
+      luz::luz_callback_early_stopping(
+        "valid_captcha acc",
+        min_delta = parm$early_stop_min_delta,
+        patience = parm$early_stop_patience,
+        mode = "max"
+      ),
+      luz::luz_callback_csv_logger(parm$path_log)
+    )
+  )
 
-  captcha::print_results(epoch, train_metrics, valid_metrics)
-}
 
 # export fitted model -------------------------------------------------------
 
-torch::torch_save(model, "model.pt")
-
+fitted_model_path <- paste0(parm$captcha_name, ".pt")
+luz::luz_save(fitted, fitted_model_path)
