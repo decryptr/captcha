@@ -4,10 +4,14 @@
 \alias{captcha_load_model}
 \title{Load captcha model}
 \usage{
-captcha_load_model(captcha)
+captcha_load_model(captcha, repo = "decryptr/captcha", tag = "captcha_model")
 }
 \arguments{
-\item{captcha}{file name or captcha name from \url{available_models()}}
+\item{captcha}{file name or captcha name}
+
+\item{repo}{repo in the form \code{"<user>/<captcha>"}. Default \code{"decryptr/captcha"}}
+
+\item{tag}{tag name of the release to load the file.}
 }
 \description{
 Load captcha model
