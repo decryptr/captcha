@@ -1,10 +1,21 @@
 #' Function to solve Captchas
 #'
-#' @param files files to read
+#' @param files files to read. Can be a character vector or an object of class `captcha`.
 #' @param model model of class `luz_module_fitted`
 #'
+#' @name decrypt
 #' @export
 decrypt <- function(files, model) {
+  UseMethod("decrypt")
+}
+
+#' @export
+decrypt.captcha <- function(files, model) {
+  decrypt.default(captcha$path, model)
+}
+
+#' @export
+decrypt.default <- function(files, model) {
   as.character(purrr::map_chr(files, decrypt_, model))
 }
 
