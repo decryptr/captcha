@@ -13,12 +13,11 @@
 #' counterpart)
 #' @param rm_old Whether or not to delete unanswered captchas after
 #' copying and renaming them
-#' @param ... Other arguments passed on to [read_captcha()]
 #'
 #' @return A vector with the paths to the newly created files
 #'
 #' @export
-classify <- function(files, answers = NULL, path = NULL, rm_old = FALSE, ...) {
+classify <- function(files, answers = NULL, path = NULL, rm_old = FALSE) {
 
   if ("captcha" %in% class(files)) {
     files <- files$path
@@ -39,8 +38,7 @@ classify <- function(files, answers = NULL, path = NULL, rm_old = FALSE, ...) {
       files, answers,
       classify_,
       path = path,
-      rm_old = rm_old,
-      ...
+      rm_old = rm_old
     )
 
   } else {
@@ -51,29 +49,22 @@ classify <- function(files, answers = NULL, path = NULL, rm_old = FALSE, ...) {
       classify_,
       ans = NULL,
       path = path,
-      rm_old = rm_old,
-      ...
+      rm_old = rm_old
     )
   }
 
   return(files)
 }
 
-classify_ <- function(cap, ans, path, rm_old, ...) {
+classify_ <- function(cap, ans, path, rm_old) {
 
   # Read captcha
   cap_ <- read_captcha(cap)
 
   # If interactive, prompt for answer
   if (is.null(ans)) {
-
-    # TODO If passed a model, use it
-    if (!is.null(list(...)$model)) {
-      ans <- decrypt(cap, list(...)$model)
-    } else {
-      plot.captcha(cap_)
-      ans <- readline("Answer: ")
-    }
+    plot.captcha(cap_)
+    ans <- readline("Answer: ")
   }
 
   # Get information about where the file should be saved

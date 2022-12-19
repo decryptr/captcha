@@ -13,7 +13,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Imports: 
     torch (>= 0.2.1),
     purrr (>= 0.3.4),
@@ -26,6 +26,7 @@ Imports:
     torchvision,
     luz,
     R6,
-    rlang
+    rlang,
+    piggyback
 URL: https://github.com/decryptr/captcha
 BugReports: https://github.com/decryptr/captcha/issues

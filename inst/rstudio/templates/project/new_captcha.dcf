@@ -1,0 +1,4 @@
+Binding: new_captcha_gui
+Title: Solve Captcha project template
+OpenFiles: 01_download.R
+Icon: captcha_icon.png

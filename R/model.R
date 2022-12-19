@@ -22,12 +22,6 @@ calcular_x <- function(x, dims) {
     torch::torch_stack()
 }
 
-#' Prepare image
-#'
-#' @name prepare
-#' @param img image
-#'
-#' @export
 train_transforms <- function(img) {
   img |>
     # torchvision::transform_random_resized_crop(
@@ -38,17 +32,12 @@ train_transforms <- function(img) {
     torchvision::transform_normalize(mean = .5, std = .2)
 }
 
-#' Prepare image
-#'
-#' @rdname prepare
-#'
-#' @export
 valid_transforms <- function(img) {
   img |>
     torchvision::transform_normalize(mean = .5, std = .2)
 }
 
-#' @rdname prepare
+#' Captcha in-memory dataset
 #'
 #' @param files captcha files
 #' @param dims vector of length two with file dimentions
@@ -119,8 +108,8 @@ net_captcha <- torch::nn_module(
     self$batchnorm2 <- torch::nn_batch_norm2d(64)
     self$conv3 <- torch::nn_conv2d(64, 64, 3)
     self$batchnorm3 <- torch::nn_batch_norm2d(64)
-    self$dropout1 <- torch::nn_dropout2d(dropout[1])
-    self$dropout2 <- torch::nn_dropout2d(dropout[2])
+    self$dropout1 <- torch::nn_dropout(dropout[1])
+    self$dropout2 <- torch::nn_dropout(dropout[2])
 
     self$fc1 <- torch::nn_linear(
       # must be the same as last convnet

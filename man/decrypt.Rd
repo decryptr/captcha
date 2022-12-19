@@ -2,15 +2,15 @@
 % Please edit documentation in R/decrypt.R
 \name{decrypt}
 \alias{decrypt}
-\title{Funcao de resolver o captcha}
+\title{Function to solve Captchas}
 \usage{
-decrypt(file, mm)
+decrypt(files, model)
 }
 \arguments{
-\item{file}{arquivo para ler}
+\item{files}{files to read}
 
-\item{mm}{modelo}
+\item{model}{model of class \code{luz_module_fitted}}
 }
 \description{
-Funcao de resolver o captcha
+Function to solve Captchas
 }

@@ -11,3 +11,8 @@ new_captcha <- function(path) {
   usethis::use_rstudio()
   usethis::proj_activate(path)
 }
+
+# used in RStudio GUI
+new_captcha_gui <- function(path, ...) {
+  new_captcha(path)
+}
