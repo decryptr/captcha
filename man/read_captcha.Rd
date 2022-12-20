@@ -4,12 +4,12 @@
 \alias{read_captcha}
 \title{Read captcha files}
 \usage{
-read_captcha(files, ans_in_path = FALSE)
+read_captcha(files, lab_in_path = FALSE)
 }
 \arguments{
 \item{files}{Paths to one or more captcha images}
 
-\item{ans_in_path}{Whether or not the answers to the captchas are already
+\item{lab_in_path}{Whether or not the labels to the captchas are already
 in the paths to the files (separated by and underscore in the filename)}
 }
 \value{
@@ -17,7 +17,7 @@ A list of captcha objects
 }
 \description{
 Given the paths to one or more files, reads and converts
-them into a \code{captcha} list that can be used for classification or
-decryption. If \code{ans_in_path = TRUE}, will take the answer for the
-captchas from their filenames and get them ready for modeling.
+them into a \code{captcha} list that can be used for modeling or
+prediction. If \code{lab_in_path = TRUE}, will take the label for the
+Captchas from their filenames and get them ready for modeling.
 }

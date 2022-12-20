@@ -158,8 +158,8 @@ captcha_generate <- function(write_disk = FALSE,
       pattern = "captcha"
     )
     magick::image_write(m_complete, f_captcha)
-    f_classify <- classify(f_captcha, tolower(captcha_value), rm_old = TRUE)
-    result$file <- f_classify
+    f_lab <- captcha_annotate(f_captcha, tolower(captcha_value), rm_old = TRUE)
+    result$file <- f_lab
   }
   result
 }

@@ -11,7 +11,7 @@ decrypt <- function(files, model) {
 
 #' @export
 decrypt.captcha <- function(files, model) {
-  decrypt.default(captcha$path, model)
+  decrypt.default(files$path, model)
 }
 
 #' @export

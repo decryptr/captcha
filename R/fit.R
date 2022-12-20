@@ -23,11 +23,7 @@ captcha_fit_model <- function(dir,
                               batch_size = 40,
                               epochs = 100) {
 
-  captcha_ds <- captcha_dataset(
-    root = dir,
-    captcha = NULL,
-    download = FALSE
-  )
+  captcha_ds <- captcha_dataset(dir)
 
   if (is.null(dir_valid)) {
 
@@ -53,11 +49,7 @@ captcha_fit_model <- function(dir,
       shuffle = TRUE
     )
 
-    captcha_ds_valid <- captcha_dataset(
-      root = dir_valid,
-      captcha = NULL,
-      download = FALSE
-    )
+    captcha_ds_valid <- captcha_dataset(dir_valid)
 
     captcha_dl_valid <- torch::dataloader(
       captcha_ds_valid,
