@@ -1,22 +1,22 @@
 #' @title Read captcha files
 #'
 #' @description Given the paths to one or more files, reads and converts
-#' them into a `captcha` list that can be used for classification or
-#' decryption. If `ans_in_path = TRUE`, will take the answer for the
-#' captchas from their filenames and get them ready for modeling.
+#' them into a `captcha` list that can be used for modeling or
+#' prediction. If `lab_in_path = TRUE`, will take the label for the
+#' Captchas from their filenames and get them ready for modeling.
 #'
 #' @param files Paths to one or more captcha images
-#' @param ans_in_path Whether or not the answers to the captchas are already
-#' in the paths to the files (separated by and underscore in the filename)
+#' @param lab_in_path Whether or not the labels to the captchas are already
+#'   in the paths to the files (separated by and underscore in the filename)
 #'
 #' @return A list of captcha objects
 #'
 #' @export
-read_captcha <- function(files, ans_in_path = FALSE) {
+read_captcha <- function(files, lab_in_path = FALSE) {
 
   imgs <- magick::image_read(files)
   labs <- NULL
-  if (ans_in_path) {
+  if (lab_in_path) {
     labs <- get_labels(files)
   }
 
@@ -30,6 +30,6 @@ read_captcha <- function(files, ans_in_path = FALSE) {
 get_labels <- function(files) {
   files |>
     basename() |>
-    stringr::str_extract("(?<=_)[0-9a-zA-Z]+")
+    stringr::str_extract("(?<=_)[0-9a-zA-Z]+(?=\\.[0-9a-zA-Z]+$)")
 }
 
