@@ -42,6 +42,12 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/advanced.html">Advanced Usage</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -62,7 +68,7 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="captcha-">captcha <img src="reference/figures/hex.png" align="right"><a class="anchor" aria-label="anchor" href="#captcha-"></a>
+<div class="page-header"><h1 id="captcha-">captcha <img src="reference/figures/hex_small.png" align="right"><a class="anchor" aria-label="anchor" href="#captcha-"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -85,8 +91,8 @@
 <p>The <code><a href="reference/read_captcha.html">read_captcha()</a></code> function reads a character vector of image files and stores them in memory. Behind the scenes, the function uses the <a href="https://docs.ropensci.org/magick/" class="external-link"><code>{magick}</code></a> package to deal with the types of files that may appear (JPEG, PNG, among others).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/decryptr/captcha" class="external-link">captcha</a></span><span class="op">)</span></span>
-<span><span class="va">exemplo</span> <span class="op">&lt;-</span> <span class="st">"man/figures/dados_tjmg.jpeg"</span></span>
-<span><span class="va">captcha</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">exemplo</span><span class="op">)</span></span>
+<span><span class="va">example</span> <span class="op">&lt;-</span> <span class="st">"man/figures/dados_tjmg.jpeg"</span></span>
+<span><span class="va">captcha</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">example</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">captcha</span></span>
 <span><span class="co">#&gt;   format width height colorspace matte filesize density</span></span>
@@ -105,8 +111,8 @@
 <span><span class="co">#&gt;  $ path: chr "man/figures/dados_tjmg.jpeg"</span></span></code></pre></div>
 <p>The <code><a href="reference/read_captcha.html">read_captcha()</a></code> function has an <code>lab_in_path=</code> parameter, which indicates whether the image path contains the label. If <code>lab_in_path=TRUE</code>, the function will try to extract the label from the file (getting the text that comes after the last <code>_</code> of the path) and store it in the <code>$lab</code> element.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exemplo</span> <span class="op">&lt;-</span> <span class="st">"man/figures/mnist128c49c36e13_6297.png"</span></span>
-<span><span class="va">captcha</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">exemplo</span>, lab_in_path <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">example</span> <span class="op">&lt;-</span> <span class="st">"man/figures/mnist128c49c36e13_6297.png"</span></span>
+<span><span class="va">captcha</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">example</span>, lab_in_path <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">captcha</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Class 'captcha'  hidden list of 3</span></span>
@@ -115,19 +121,19 @@
 <span><span class="co">#&gt;  $ path: chr "man/figures/mnist128c49c36e13_6297.png"</span></span></code></pre></div>
 <p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function is a method of <a href="https://adv-r.hadley.nz/s3.html" class="external-link">class S3</a> from base R. The function facilitates the visualization of Captchas. The function receives a list of images (obtained with the <code><a href="reference/read_captcha.html">read_captcha()</a></code> function) and displays the Captcha visually.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exemplo</span> <span class="op">&lt;-</span> <span class="st">"man/figures/dados_tjmg.jpeg"</span></span>
-<span><span class="va">captcha</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">exemplo</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">example</span> <span class="op">&lt;-</span> <span class="st">"man/figures/dados_tjmg.jpeg"</span></span>
+<span><span class="va">captcha</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">example</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">captcha</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/fig-example-plot-1.png" width="30%" style="display: block; margin: auto;"></p>
 <p>An interesting aspect of the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function is that it deals with a list of Captchas. It is useful when the goal is to view several Captchas in the image simultaneously. The next image shows an example.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exemplos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"man/figures/"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"man/figures/"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"dados_tjmg.jpeg"</span>,</span>
 <span>  <span class="st">"dados_esaj.png"</span>,</span>
 <span>  <span class="st">"dados_rfb.png"</span>,</span>
 <span>  <span class="st">"dados_sei.png"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">captchas</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">exemplos</span><span class="op">)</span></span>
+<span><span class="va">captchas</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">examples</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">captchas</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/fig-example-plot-multi-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>By default, the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function arranges the images into four columns. To change the default, one can modify the options using <code>options(captcha.print.cols = N)</code>, where <code>N</code> is the desired number of columns. The next image shows an example with two columns.</p>
