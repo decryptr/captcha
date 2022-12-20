@@ -6,18 +6,19 @@ Authors@R:
              email = 'julio.trecenti@gmail.com', 
              role = c('cre', 'aut'),
              comment = c(ORCID = "0000-0002-1680-6389")))
-Description: This package helps you download, visualize and solve captchas.
+Description: This package helps to download, visualize and solve captchas.
   It is built as an extensible API so anyone can contribute with their
   own captcha-solving code.
+Depends: 
+    R (>= 4.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     torch (>= 0.2.1),
-    purrr (>= 0.3.4),
-    stringr (>= 1.4.0),
+    purrr,
+    stringr,
     graphics,
     tools,
     magick,
