@@ -31,3 +31,7 @@ Imports:
     piggyback
 URL: https://github.com/decryptr/captcha
 BugReports: https://github.com/decryptr/captcha/issues
+Suggests: 
+    covr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
