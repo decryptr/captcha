@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# captcha <img src="man/figures/hex.png" align="right" />
+# captcha <img src="man/figures/hex_small.png" align="right" />
 
 <!-- badges: start -->
 
@@ -46,8 +46,8 @@ types of files that may appear (JPEG, PNG, among others).
 
 ``` r
 library(captcha)
-exemplo <- "man/figures/dados_tjmg.jpeg"
-captcha <- read_captcha(exemplo)
+example <- "man/figures/dados_tjmg.jpeg"
+captcha <- read_captcha(example)
 
 captcha
 #>   format width height colorspace matte filesize density
@@ -84,8 +84,8 @@ file (getting the text that comes after the last `_` of the path) and
 store it in the `$lab` element.
 
 ``` r
-exemplo <- "man/figures/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(exemplo, lab_in_path = TRUE)
+example <- "man/figures/mnist128c49c36e13_6297.png"
+captcha <- read_captcha(example, lab_in_path = TRUE)
 
 str(captcha)
 #> Class 'captcha'  hidden list of 3
@@ -101,8 +101,8 @@ of images (obtained with the `read_captcha()` function) and displays the
 Captcha visually.
 
 ``` r
-exemplo <- "man/figures/dados_tjmg.jpeg"
-captcha <- read_captcha(exemplo)
+example <- "man/figures/dados_tjmg.jpeg"
+captcha <- read_captcha(example)
 plot(captcha)
 ```
 
@@ -113,13 +113,13 @@ list of Captchas. It is useful when the goal is to view several Captchas
 in the image simultaneously. The next image shows an example.
 
 ``` r
-exemplos <- paste0("man/figures/", c(
+examples <- paste0("man/figures/", c(
   "dados_tjmg.jpeg",
   "dados_esaj.png",
   "dados_rfb.png",
   "dados_sei.png"
 ))
-captchas <- read_captcha(exemplos)
+captchas <- read_captcha(examples)
 plot(captchas)
 ```
 

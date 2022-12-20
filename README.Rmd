@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# captcha <img src="man/figures/hex.png" align="right" />
+# captcha <img src="man/figures/hex_small.png" align="right" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -53,8 +53,8 @@ The `read_captcha()` function reads a character vector of image files and stores
 #| echo: true
 #| out-width: 30%
 library(captcha)
-exemplo <- "man/figures/dados_tjmg.jpeg"
-captcha <- read_captcha(exemplo)
+example <- "man/figures/dados_tjmg.jpeg"
+captcha <- read_captcha(example)
 
 captcha
 ```
@@ -77,8 +77,8 @@ The `read_captcha()` function has an `lab_in_path=` parameter, which indicates w
 
 ```{r}
 #| echo: true
-exemplo <- "man/figures/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(exemplo, lab_in_path = TRUE)
+example <- "man/figures/mnist128c49c36e13_6297.png"
+captcha <- read_captcha(example, lab_in_path = TRUE)
 
 str(captcha)
 ```
@@ -89,8 +89,8 @@ The `plot()` function is a method of [class S3](https://adv-r.hadley.nz/s3.html)
 #| label: fig-example-plot
 #| echo: true
 #| out-width: 30%
-exemplo <- "man/figures/dados_tjmg.jpeg"
-captcha <- read_captcha(exemplo)
+example <- "man/figures/dados_tjmg.jpeg"
+captcha <- read_captcha(example)
 plot(captcha)
 ```
 
@@ -100,13 +100,13 @@ An interesting aspect of the `plot()` function is that it deals with a list of C
 #| label: fig-example-plot-multi
 #| echo: true
 #| out-width: 70%
-exemplos <- paste0("man/figures/", c(
+examples <- paste0("man/figures/", c(
   "dados_tjmg.jpeg",
   "dados_esaj.png",
   "dados_rfb.png",
   "dados_sei.png"
 ))
-captchas <- read_captcha(exemplos)
+captchas <- read_captcha(examples)
 plot(captchas)
 ```
 
