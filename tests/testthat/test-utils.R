@@ -9,6 +9,9 @@ test_that("print captcha as expected", {
 test_that("plot captcha as expected", {
 
   # from the testthat documentation
+
+  skip_on_ci()
+
   save_png <- function(code, width = 400, height = 400) {
     path <- tempfile(fileext = ".png")
     png(path, width = width, height = height)
@@ -24,6 +27,8 @@ test_that("plot captcha as expected", {
 })
 
 test_that("plot captcha as expected, big images", {
+
+  skip_on_ci()
 
   # from the testthat documentation
   save_png <- function(code, width = 400, height = 400) {
@@ -45,6 +50,8 @@ test_that("plot captcha as expected, big images", {
 })
 
 test_that("plot captcha with annotation", {
+
+  skip_on_ci()
 
   # from the testthat documentation
   save_png <- function(code, width = 400, height = 400) {

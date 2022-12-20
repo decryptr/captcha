@@ -11,6 +11,8 @@ test_that("new captcha works", {
 
 test_that("new captcha GUI works", {
 
+  skip_on_ci()
+
   # same as new_captcha()
   tmp_dir <- withr::local_tempdir()
 
