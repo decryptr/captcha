@@ -20,6 +20,9 @@ decrypt.default <- function(files, model) {
 }
 
 decrypt_ <- function(file, mm) {
+
+  stopifnot(class(mm) %in% "luz_module_fitted")
+
   mm$model$eval()
   transformed <- mm$model$transform(file)
   ind <- mm$model(transformed) |>

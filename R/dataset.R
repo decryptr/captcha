@@ -13,26 +13,13 @@ captcha_transform_image <- function(x, input_dim = c(32L, 192L)) {
     torch::torch_stack()
 }
 
-to_gray <- function(img) {
-  if (dim(img)[1] >= 3) {
-    torchvision::transform_rgb_to_grayscale(img)
-  } else {
-    img[1]
-  }
-}
-
 adjust_dimensions <- function(img) {
-  if (dim(img)[1] >= 3) {
-    img_adj <- img[1:3]
-    if (all(as.numeric(img_adj) == 0) && dim(img)[1] == 4) {
-      img_adj <- torch::torch_stack(list(img[4], img[4], img[4]))
-    }
-  } else {
-    img_adj <- torch::torch_stack(list(img[1], img[1], img[1]))
+  img_adj <- img[1:3]
+  if (all(as.numeric(img_adj) == 0) && dim(img)[1] == 4) {
+    img_adj <- torch::torch_stack(list(img[4], img[4], img[4]))
   }
   img_adj
 }
-
 
 #' File to response matrix (tensor)
 #'
@@ -41,6 +28,17 @@ adjust_dimensions <- function(img) {
 #'
 #' @export
 captcha_transform_label <- function(all_letters, vocab) {
+
+  len <- purrr::map_int(all_letters, \(x) length(x[[1]]))
+  unq_len <- unique(len)
+  if (length(unq_len) > 1) {
+    id_1 <- which(len == unq_len[1])[1]
+    id_2 <- which(len == unq_len[2])[1]
+    usethis::ui_stop(paste0(
+      "All Captchas must have the same length.\n",
+      "id {id_1} has length {unq_len[1]} and {id_2} has length {unq_len[2]}."
+    ))
+  }
 
   all_letters |>
     purrr::map(~{
@@ -52,8 +50,7 @@ captcha_transform_label <- function(all_letters, vocab) {
 
 #' Captcha datasets
 #'
-#' @param root (string): root directory of dataset where `captcha.zip`
-#'   exists or will be saved to if download is set to `TRUE`
+#' @param root (string): root directory where the files are stored
 #' @param transform_image (callable, optional): A function/transform
 #'   that takes in an file path and returns an torch tensor prepared
 #'   to feed the model.

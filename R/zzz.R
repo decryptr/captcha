@@ -1,5 +1,3 @@
-utils::globalVariables(unique(c("super")))
-
 .onLoad <- function(libname, pkgname) {
   options(captcha.print.rows = 25)
   options(captcha.print.cols = 4)

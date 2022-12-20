@@ -117,7 +117,6 @@ captcha_generate <- function(write_disk = FALSE,
     magick::image_resize(stringr::str_glue("{n_cols}x{n_rows}"))
 
 
-
   if (stats::runif(1) < p_implode) {
     m_text <- magick::image_implode(m_text, factor = stats::runif(1, 0, .4))
   }
@@ -138,17 +137,19 @@ captcha_generate <- function(write_disk = FALSE,
     m_text <- magick::image_lat(m_text, geometry = lat_geo)
   }
 
-
   m_complete <- magick::image_composite(
     m_bg, m_text,
     operator = "Atop",
     gravity = "center"
   )
 
+  path_captcha <- NULL
   result <- list(
-    image = m_complete,
-    captcha = captcha_value
+    img = m_complete,
+    lab = captcha_value,
+    path = path_captcha
   )
+  class(result) <- c("captcha")
 
   if (write_disk) {
     dir.create(path, FALSE, TRUE)
@@ -159,7 +160,7 @@ captcha_generate <- function(write_disk = FALSE,
     )
     magick::image_write(m_complete, f_captcha)
     f_lab <- captcha_annotate(f_captcha, tolower(captcha_value), rm_old = TRUE)
-    result$file <- f_lab
+    result$path <- f_lab
   }
   result
 }

@@ -18,18 +18,23 @@ read_captcha <- function(files, lab_in_path = FALSE) {
   labs <- NULL
   if (lab_in_path) {
     labs <- get_labels(files)
+    if (any(is.na(labs))) {
+      warning("The labels for some files were not found.")
+    }
   }
 
   # Iterate over files
   out <- list(img = imgs, lab = labs, path = files)
 
   class(out) <- c("captcha")
-  return(out)
+
+  out
 }
 
 get_labels <- function(files) {
   files |>
     basename() |>
-    stringr::str_extract("(?<=_)[0-9a-zA-Z]+(?=\\.[0-9a-zA-Z]+$)")
+    tools::file_path_sans_ext() |>
+    stringr::str_extract("(?<=_)[0-9a-zA-Z]+($|[._])")
 }
 

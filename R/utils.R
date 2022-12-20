@@ -41,14 +41,6 @@ length.captcha <- function(x) {
 #' @export
 plot.captcha <- function(x, y, ...) {
 
-  # N <- getOption("captcha.print.max")
-  # if (length(x$img) > N) {
-  #   usethis::ui_todo(stringr::str_glue(
-  #     "Too many images, printing first {N}. ",
-  #     "To override, run options('captcha.print.max' = N_MAX)"
-  #   ))
-  # }
-
   img <- x$img
   lab <- x$lab
 
@@ -72,6 +64,7 @@ plot.captcha <- function(x, y, ...) {
     img <- magick::image_annotate(
       img, lab,
       gravity = "northeast",
+      color = "black",
       boxcolor = "white"
     )
   }
