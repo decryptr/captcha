@@ -12,8 +12,7 @@ captcha_dataset(
 )
 }
 \arguments{
-\item{root}{(string): root directory of dataset where \code{captcha.zip}
-exists or will be saved to if download is set to \code{TRUE}}
+\item{root}{(string): root directory where the files are stored}
 
 \item{transform_image}{(callable, optional): A function/transform
 that takes in an file path and returns an torch tensor prepared
