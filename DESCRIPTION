@@ -10,13 +10,14 @@ Description: This package helps to download, visualize and solve captchas.
   It is built as an extensible API so anyone can contribute with their
   own captcha-solving code.
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.1.0),
+    torch
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
-    torch (>= 0.2.1),
+    torch,
     purrr,
     stringr,
     graphics,
@@ -28,7 +29,8 @@ Imports:
     luz,
     R6,
     rlang,
-    piggyback
+    piggyback,
+    withr
 URL: https://github.com/decryptr/captcha,
     https://decryptr.github.io/captcha/
 BugReports: https://github.com/decryptr/captcha/issues
