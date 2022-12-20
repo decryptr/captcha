@@ -9,4 +9,6 @@
 library(testthat)
 library(captcha)
 
+torch::install_torch()
+
 test_check("captcha")

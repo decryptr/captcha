@@ -10,8 +10,7 @@ Description: This package helps to download, visualize and solve captchas.
   It is built as an extensible API so anyone can contribute with their
   own captcha-solving code.
 Depends: 
-    R (>= 4.1.0),
-    torch
+    R (>= 4.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
