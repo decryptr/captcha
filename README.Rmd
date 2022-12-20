@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test coverage](https://codecov.io/gh/decryptr/captcha/branch/master/graph/badge.svg)](https://app.codecov.io/gh/decryptr/captcha?branch=master)
+[![R-CMD-check](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This package is an extensible API to build models and solve Captchas (Completely Automated Public Turing test to tell Computers and Humans Apart). It provides tools to read Captchas, visualize Captchas, annotate Captchas, fit models, and share fitted models. 
@@ -70,12 +72,12 @@ The captcha object is a list with three elements: `$img`, which contains the ima
 str(captcha)
 ```
 
-The `read_captcha()` function has an `ans_in_path=` parameter, which indicates whether the image path contains the label. If `ans_in_path=TRUE`, the function will try to extract the label from the file (getting the text that comes after the last `_` of the path) and store it in the `$lab` element.
+The `read_captcha()` function has an `lab_in_path=` parameter, which indicates whether the image path contains the label. If `lab_in_path=TRUE`, the function will try to extract the label from the file (getting the text that comes after the last `_` of the path) and store it in the `$lab` element.
 
 ```{r}
 #| echo: true
 exemplo <- "man/figures/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(exemplo, ans_in_path = TRUE)
+captcha <- read_captcha(exemplo, lab_in_path = TRUE)
 
 str(captcha)
 ```
@@ -159,7 +161,7 @@ Finally, when the image has a label, the `plot()` function shows the label on th
 #| echo: true
 #| out-width: 30%
 example <- "man/figures/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(example, ans_in_path = TRUE)
+captcha <- read_captcha(example, lab_in_path = TRUE)
 plot(captcha)
 ```
 

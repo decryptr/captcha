@@ -7,6 +7,8 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/decryptr/captcha/branch/master/graph/badge.svg)](https://app.codecov.io/gh/decryptr/captcha?branch=master)
 <!-- badges: end -->
 
 This package is an extensible API to build models and solve Captchas
@@ -72,15 +74,15 @@ str(captcha)
 #>  $ path: chr "man/figures/dados_tjmg.jpeg"
 ```
 
-The `read_captcha()` function has an `ans_in_path=` parameter, which
+The `read_captcha()` function has an `lab_in_path=` parameter, which
 indicates whether the image path contains the label. If
-`ans_in_path=TRUE`, the function will try to extract the label from the
+`lab_in_path=TRUE`, the function will try to extract the label from the
 file (getting the text that comes after the last `_` of the path) and
 store it in the `$lab` element.
 
 ``` r
 exemplo <- "man/figures/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(exemplo, ans_in_path = TRUE)
+captcha <- read_captcha(exemplo, lab_in_path = TRUE)
 
 str(captcha)
 #> Class 'captcha'  hidden list of 3
@@ -169,7 +171,7 @@ label on the corner of the image. The following image shows an example.
 
 ``` r
 example <- "man/figures/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(example, ans_in_path = TRUE)
+captcha <- read_captcha(example, lab_in_path = TRUE)
 plot(captcha)
 ```
 
