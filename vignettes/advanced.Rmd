@@ -211,9 +211,6 @@ Lastly, the model must be saved to a local file. This is accomplished using the 
 
 The script uses the `{usethis}` package to organize the repository, configuring Git (code versioning software) and GitHub (*web* repository organization system). Furthermore, the *script* uses the `{piggyback}` package to make the fitted model available in the *releases* of the new repository. Optionally, the user can also make the raw data with the annotated files available in a `.zip` file, which is recommended, as it allows other people to work with the same data and improve the models.
 
-
-Um detalhe importante é sobre a inserção de arquivos pesados no repositório. O *script* utiliza *releases* para disponibilizar as soluções porque não é uma boa prática subir arquivos como modelos ajustados ou arquivos brutos (imagens) diretamente no repositório. Isso acontece porque o repositório pode ficar demasiadamente pesado e o histórico do *Git* fica alterado.
-
 An important detail is about the usage of heavy files in the git repository. The *script* uses *releases* to share the solutions because it is not good practice to upload files such as fitted models or raw files (images) directly to the repository. This happens because the repository can become too heavy for the git algorithm to handle.
 
 Once shared across releases in the repository, the model is readable by anyone using the `{captcha}` package. Just run the code below and the model will be loaded.
