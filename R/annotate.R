@@ -47,7 +47,7 @@ captcha_annotate <- function(files, labels = NULL, path = NULL, rm_old = FALSE) 
     files <- purrr::map_chr(
       files,
       captcha_annotate_one,
-      ans = NULL,
+      lab = NULL,
       path = path,
       rm_old = rm_old
     )
