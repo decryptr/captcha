@@ -28,8 +28,7 @@ Imports:
     luz,
     R6,
     rlang,
-    piggyback,
-    withr
+    piggyback
 URL: https://github.com/decryptr/captcha,
     https://decryptr.github.io/captcha/
 BugReports: https://github.com/decryptr/captcha/issues
