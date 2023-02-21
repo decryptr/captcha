@@ -1,6 +1,6 @@
 Package: captcha
 Title: Solve Captchas Using Torch
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     c(person('Julio', 'Trecenti', 
              email = 'julio.trecenti@gmail.com', 
