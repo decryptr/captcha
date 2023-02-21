@@ -342,4 +342,9 @@ a neural network model using the `{captcha}` package. However, the
 training step involves many small adaptations, it was decided to export
 functions in two depth levels. To address that, the `{captcha}` package
 also provides a **procedural** approach to fit the model, using a
-step-by-step described in the [advanced guide](TODO).
+step-by-step described in the [advanced
+guide](https://decryptr.github.io/captcha/articles/advanced.html).
+
+## License
+
+MIT

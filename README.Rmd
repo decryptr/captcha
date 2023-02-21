@@ -285,4 +285,8 @@ Fitting a new Captcha model can be challenging. To help with that, the `{captcha
 
 ## Advanced usage
 
-Once the premises of the classified base are met, it is possible to fit a neural network model using the `{captcha}` package. However, the training step involves many small adaptations, it was decided to export functions in two depth levels. To address that, the `{captcha}` package also provides a **procedural** approach to fit the model, using a step-by-step described in the [advanced guide](TODO).
+Once the premises of the classified base are met, it is possible to fit a neural network model using the `{captcha}` package. However, the training step involves many small adaptations, it was decided to export functions in two depth levels. To address that, the `{captcha}` package also provides a **procedural** approach to fit the model, using a step-by-step described in the [advanced guide](https://decryptr.github.io/captcha/articles/advanced.html).
+
+## License
+
+MIT
