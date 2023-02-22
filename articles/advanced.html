@@ -131,7 +131,7 @@ fit the model and save the fitted model.</li>
 <code>04_share.R</code>: Contains operations to create a
 <em>git</em> repository of the solution and make the fitted model
 available. The model can be loaded afterwards using the
-<code><a href="../reference/captcha_load_model.html">captcha_load_model()</a></code> function, without the need to copy
+<code><a href="../reference/models.html">captcha_load_model()</a></code> function, without the need to copy
 files locally.</li>
 </ul>
 <div class="section level3">
@@ -214,8 +214,7 @@ transformation function, the <em>dropout</em> hyperparameters and the
 number of units in the dense layer. Notice that the parameters of the
 convolutions are fixed, already prepared to work well with an image of
 dimensions <code>32x192</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">initialize</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span>,</span>
+<pre class="{{r}}"><code><span><span class="va">initialize</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span>,</span>
 <span>                      <span class="va">output_ndigits</span>,</span>
 <span>                      <span class="va">output_vocab_size</span>,</span>
 <span>                      <span class="va">vocab</span>,</span>
@@ -249,7 +248,7 @@ dimensions <code>32x192</code>.</p>
 <span>  <span class="va">self</span><span class="op">$</span><span class="va">output_ndigits</span> <span class="op">&lt;-</span> <span class="va">output_ndigits</span></span>
 <span>  <span class="va">self</span><span class="op">$</span><span class="va">vocab</span> <span class="op">&lt;-</span> <span class="va">vocab</span></span>
 <span>  <span class="va">self</span><span class="op">$</span><span class="va">transform</span> <span class="op">&lt;-</span> <span class="va">transform</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<span><span class="op">}</span></span></code></pre>
 <p>The <em>feed forward</em> function is described below. The function
 applies the step-by-step procedure of a convolutional neural network,
 with an image <code>x</code> as input and returning a logit matrix
@@ -258,8 +257,7 @@ returns the logits, not the probabilities, because the loss function
 takes the logits as input. If the user decides to modify the
 <code>forward</code> method to return probabilities, she will also need
 to adapt the used loss function.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">forward</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<pre class="{{r}}"><code><span><span class="va">forward</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
 <span>  <span class="va">out</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span></span>
 <span>    <span class="co"># normalize</span></span>
@@ -297,7 +295,7 @@ to adapt the used loss function.</p>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">output_vocab_size</span></span>
 <span>  <span class="op">)</span><span class="op">)</span></span>
 <span>  </span>
-<span><span class="op">}</span></span></code></pre></div>
+<span><span class="op">}</span></span></code></pre>
 <p>Once the architecture of the model is defined, the penultimate step
 is the fitting step. It is orchestrated by the <a href="https://mlverse.github.io/luz/" class="external-link">luz</a>
 package, which facilitates the creation of the optimization
@@ -418,7 +416,7 @@ handle.</p>
 by anyone using the <a href="https://github.com/decryptr/captcha" class="external-link">captcha</a> package. Just run the code
 below and the model will be loaded.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/captcha_load_model.html">captcha_load_model</a></span><span class="op">(</span><span class="st">"&lt;name&gt;"</span>, <span class="st">"&lt;user&gt;/&lt;repo&gt;"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/models.html">captcha_load_model</a></span><span class="op">(</span><span class="st">"&lt;name&gt;"</span>, <span class="st">"&lt;user&gt;/&lt;repo&gt;"</span><span class="op">)</span></span></code></pre></div>
 <p>With this, all the work can be shared and Captchas can be solved in a
 collaborative manner by the community. Using the
 <code><a href="../reference/new_captcha.html">new_captcha()</a></code> workflow, the user has the flexibility to

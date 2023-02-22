@@ -22,9 +22,6 @@
     <loc>https://decryptr.github.io/captcha/index.html</loc>
   </url>
   <url>
-    <loc>https://decryptr.github.io/captcha/reference/available_models.html</loc>
-  </url>
-  <url>
     <loc>https://decryptr.github.io/captcha/reference/captcha_accuracy.html</loc>
   </url>
   <url>
@@ -40,9 +37,6 @@
     <loc>https://decryptr.github.io/captcha/reference/captcha_generate.html</loc>
   </url>
   <url>
-    <loc>https://decryptr.github.io/captcha/reference/captcha_load_model.html</loc>
-  </url>
-  <url>
     <loc>https://decryptr.github.io/captcha/reference/captcha_transform_image.html</loc>
   </url>
   <url>
@@ -53,6 +47,9 @@
   </url>
   <url>
     <loc>https://decryptr.github.io/captcha/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://decryptr.github.io/captcha/reference/models.html</loc>
   </url>
   <url>
     <loc>https://decryptr.github.io/captcha/reference/net_captcha.html</loc>
