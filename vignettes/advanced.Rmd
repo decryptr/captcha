@@ -65,10 +65,7 @@ To customize the model, the user must create a new module, modifying the `initia
 By default, the template code is as described below. The parameters `input_dim=`, `output_ndigits=`, `output_vocab_size=` and `vocab=` describe, respectively, the dimensions of the image, the length of the response, the length of the alphabet and the elements of the alphabet. The `transform=`, `dropout=` and `dense_units=` parameters control, respectively, the image transformation function, the *dropout* hyperparameters and the number of units in the dense layer. Notice that the parameters of the convolutions are fixed, already prepared to work well with an image of dimensions `32x192`.
 
 
-```{r}
-#| echo: true
-#| eval: false
-
+```{{r}}
 initialize = function(input_dim,
                       output_ndigits,
                       output_vocab_size,
@@ -109,10 +106,7 @@ initialize = function(input_dim,
 
 The *feed forward* function is described below. The function applies the step-by-step procedure of a convolutional neural network, with an image `x` as input and returning a logit matrix giving the model weights for each letter of the answer. The model returns the logits, not the probabilities, because the loss function takes the logits as input. If the user decides to modify the `forward` method to return probabilities, she will also need to adapt the used loss function.
 
-```{r}
-#| echo: true
-#| eval: false
-
+```{{r}}
 forward = function(x) {
 
   out <- x |>
