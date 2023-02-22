@@ -5,7 +5,7 @@ library(magrittr)
 
 # paths -------------------------------------------------------------------
 
-path_data <- "/home/jtrecenti/Documents/captchaDownload/data-raw/trt/img_oracle/"
+path_data <- "captchaDownload/data-raw/trt/img_oracle/"
 # path_data <- "/var/tmp/jtrecenti/img_oracle"
 path_log <- "data-raw/trt.log"
 # path_log <- args[2]
@@ -84,9 +84,4 @@ fitted <- model |>
   )
 
 luz::luz_save(fitted, "data-raw/trt_100.pt")
-
-# captcha::decrypt(
-#   "~/Documents/jtrecenti/captchaDownload/data-raw/trt/img_oracle/trt383813c7ea47_rd2kdb_1.jpeg",
-#   fitted
-# )
 
