@@ -21,6 +21,11 @@ with \code{N} letters in a matrix of dimensions \code{N}x\code{length(vocab)}. A
 labels must have the same length.
 }
 \examples{
+
+if (!torch::torch_is_installed()) {
+  torch::install_torch()
+}
+
 vocab <- letters
 resp <- captcha_transform_label(c("a","b","c","d","e"), vocab)
 class(resp)

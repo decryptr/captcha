@@ -22,9 +22,14 @@ deal with black and white or coloured images.
 }
 \examples{
 
+if (!torch::torch_is_installed()) {
+  torch::install_torch()
+}
+
 captcha_file <- fs::dir_ls(
   system.file("examples/captcha/", package = "captcha"
 ))
+
 result <- captcha_transform_image(captcha_file)
 class(result)
 dim(result)

@@ -43,6 +43,11 @@ This object implements a dataset using the \code{\link[torch:dataset]{torch::dat
 It loads all the images in torch tensors, as well as the labels.
 }
 \examples{
+
+if (!torch::torch_is_installed()) {
+  torch::install_torch()
+}
+
 annotated_folder <- system.file(
   "examples/annotated_captcha",
   package = "captcha"
