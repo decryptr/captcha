@@ -138,25 +138,34 @@ as a predictive function and as the input to a luz fitting workflow.</p>
 <span class="r-in"><span>  dropout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.25</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  dense_units <span class="op">=</span> <span class="fl">400</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cpp_torch_strided():</span> Lantern is not loaded. Please use `install_torch()` to install additional dependencies.</span>
 <span class="r-in"><span><span class="va">model</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'model' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> An `nn_module` containing 1,204,296 parameters.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Modules ─────────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm0: &lt;nn_batch_norm2d&gt; #6 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • conv1: &lt;nn_conv2d&gt; #896 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm1: &lt;nn_batch_norm2d&gt; #64 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • conv2: &lt;nn_conv2d&gt; #18,496 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm2: &lt;nn_batch_norm2d&gt; #128 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • conv3: &lt;nn_conv2d&gt; #36,928 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm3: &lt;nn_batch_norm2d&gt; #128 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • dropout1: &lt;nn_dropout&gt; #0 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • dropout2: &lt;nn_dropout&gt; #0 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • fc1: &lt;nn_linear&gt; #1,126,800 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm_dense: &lt;nn_batch_norm1d&gt; #800 parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • fc2: &lt;nn_linear&gt; #20,050 parameters</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">transformed</span> <span class="op">&lt;-</span> <span class="va">model</span><span class="op">$</span><span class="fu">transform</span><span class="op">(</span><span class="va">captcha_file</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'model' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># tensor of size 1 x output_ndigits x output_vocab_size</span></span></span>
 <span class="r-in"><span><span class="va">prediction</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">transformed</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in model(transformed):</span> could not find function "model"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">prediction</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'prediction' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  5 10</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get the predicted labels</span></span></span>
 <span class="r-in"><span><span class="co"># the model is awful, because it is not fitted yet.</span></span></span>
 <span class="r-in"><span><span class="va">indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/torch/man/torch_argmax.html" class="external-link">torch_argmax</a></span><span class="op">(</span><span class="va">prediction</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mget(x = c("self", "dim", "keepdim")):</span> object 'prediction' not found</span>
 <span class="r-in"><span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">vocab</span><span class="op">[</span><span class="va">indices</span><span class="op">]</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in paste(model$vocab[indices], collapse = ""):</span> object 'model' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
