@@ -1,5 +1,6 @@
 test_that("new captcha works", {
 
+  skip_if_knitr()
   tmp_dir <- withr::local_tempdir()
 
   expect_message(new_captcha(tmp_dir))
@@ -11,6 +12,7 @@ test_that("new captcha works", {
 
 test_that("new captcha GUI works", {
 
+  skip_if_knitr()
   skip_on_ci()
 
   # same as new_captcha()

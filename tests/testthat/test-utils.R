@@ -1,4 +1,7 @@
 test_that("print captcha as expected", {
+
+  skip_if_knitr()
+
   f_captcha <- test_path("examples/tjpe.png")
   captcha <- read_captcha(f_captcha)
 
@@ -10,7 +13,7 @@ test_that("plot captcha as expected", {
 
   # from the testthat documentation
 
-  skip_on_ci()
+  skip_if_knitr()
 
   save_png <- function(code, width = 400, height = 400) {
     path <- tempfile(fileext = ".png")
@@ -28,7 +31,7 @@ test_that("plot captcha as expected", {
 
 test_that("plot captcha as expected, big images", {
 
-  skip_on_ci()
+  skip_if_knitr()
 
   # from the testthat documentation
   save_png <- function(code, width = 400, height = 400) {
@@ -51,7 +54,7 @@ test_that("plot captcha as expected, big images", {
 
 test_that("plot captcha with annotation", {
 
-  skip_on_ci()
+  skip_if_knitr()
 
   # from the testthat documentation
   save_png <- function(code, width = 400, height = 400) {
