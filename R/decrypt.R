@@ -1,7 +1,33 @@
 #' Function to solve Captchas
 #'
-#' @param files files to read. Can be a character vector or an object of class `captcha`.
+#' Returns a label for an image using a fitted model. The image can be either a
+#' character vector (of length one or more) or an object of class `captcha`.
+#'
+#' @param files files to read. Can be either a character vector
+#'   or an object of class `captcha`.
 #' @param model model of class `luz_module_fitted`
+#'
+#' @return character vector of the predicted labels.
+#'
+#' @examples
+#'
+#' captcha_file <- system.file(
+#'   "examples/captcha/cadesp.jpg",
+#'   package = "captcha"
+#' )
+#'
+#' cap <- read_captcha(captcha_file)
+#'
+#' if (interactive()) {
+#'   plot(cap)
+#' }
+#'
+#' # the code below uses access to the internet. If you want to run locally,
+#' # download the model object from the releases site.
+#' if (interactive()) {
+#'   model <- captcha_load_model("cadesp")
+#'   decrypt(cap, model_rfb)
+#' }
 #'
 #' @name decrypt
 #' @export

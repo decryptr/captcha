@@ -1,7 +1,17 @@
 #' Print information about a captcha
 #'
-#' @param x Captcha object read with [read_captcha()]
-#' @param ... -
+#' This function prints the image as a `magick-image` object on the screen.
+#'
+#' @param x Captcha object read with [read_captcha()].
+#' @param ... not used.
+#'
+#' @details
+#' The `captcha` object is a list with three elements: `$img`, which contains
+#' the image read from the `{magick}` package; `$lab`, which contains the
+#' image label (by default, `NULL`); and `$path`, which contains the path
+#' of the image.
+#'
+#' The print method gets the `$img` element from this list and prints it.
 #'
 #' @export
 print.captcha <- function(x, ...) {
@@ -32,11 +42,43 @@ length.captcha <- function(x) {
   length(x$img)
 }
 
-#' Plot a captcha
+#' Plot a Captcha
+#'
+#' This function plots a captcha object on the screen. It is a S3 method
+#' for the [graphics::plot()] function.
 #'
 #' @param x Captcha object read with [read_captcha()]
 #' @param y Not used
 #' @param ... Other arguments passed on to [graphics::plot()]
+#'
+#' @details
+#'
+#' The `plot()` function is a method of
+#' [class S3](https://adv-r.hadley.nz/s3.html) from base R.
+#' The function facilitates the visualization of Captchas. The function
+#' receives a list of images (obtained with the `read_captcha()` function)
+#' and displays the Captcha visually.
+#'
+#' An interesting aspect of the `plot()` function is that it deals with a
+#' list of Captchas. It is useful when the goal is to view several Captchas
+#' in the image simultaneously. The next image shows an example.
+#'
+#' By default, the `plot()` function arranges the images into four columns.
+#' To change the default, one can modify the options using
+#' `options(captcha.print.cols = N)`, where `N` is the desired number of
+#' columns. The next image shows an example with two columns.
+#'
+#' When the list of Captchas is too long, the `plot()` function displays a
+#' maximum number of images accompanied by a message. By default, this
+#' number is 100, with 25 rows and four columns. One can override the option
+#' by combining the `captcha.print.cols=` and `captcha.print.rows=` options.
+#'
+#' It is possible to create subsets of `captcha` objects using the `[`
+#' operator. One can also use the `length()` function to measure the
+#' number of images.
+#'
+#' Finally, when the image has a label, the `plot()` function shows the
+#' label on the corner of the image.
 #'
 #' @export
 plot.captcha <- function(x, y, ...) {
