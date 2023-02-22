@@ -12,9 +12,14 @@
 #'
 #' @examples
 #'
+#' if (!torch::torch_is_installed()) {
+#'   torch::install_torch()
+#' }
+#'
 #' captcha_file <- fs::dir_ls(
 #'   system.file("examples/captcha/", package = "captcha"
 #' ))
+#'
 #' result <- captcha_transform_image(captcha_file)
 #' class(result)
 #' dim(result)
@@ -50,6 +55,11 @@ adjust_dimensions <- function(img) {
 #' containing only zeros and ones. All rows sum exactly one.
 #'
 #' @examples
+#'
+#' if (!torch::torch_is_installed()) {
+#'   torch::install_torch()
+#' }
+#'
 #' vocab <- letters
 #' resp <- captcha_transform_label(c("a","b","c","d","e"), vocab)
 #' class(resp)
@@ -106,6 +116,11 @@ captcha_transform_label <- function(all_letters, vocab) {
 #' the dataset.
 #'
 #' @examples
+#'
+#' if (!torch::torch_is_installed()) {
+#'   torch::install_torch()
+#' }
+#'
 #' annotated_folder <- system.file(
 #'   "examples/annotated_captcha",
 #'   package = "captcha"
