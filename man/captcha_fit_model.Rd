@@ -20,11 +20,13 @@ captcha_fit_model(
 
 \item{dir_valid}{(optional) directory to validation files}
 
-\item{prop_valid}{proportion of total images considered to validation. Default 0.2.}
+\item{prop_valid}{proportion of total images considered to validation.
+Defaults to 0.2.}
 
 \item{dropout}{dropout hyperparameter. Default 0.25.}
 
-\item{dense_units}{number of dense units to use after convolution steps. Default 200.}
+\item{dense_units}{number of dense units to use after convolution steps.
+Defaults to 200.}
 
 \item{decay}{Weight decay applied each epoch.}
 
@@ -35,8 +37,33 @@ stopping, so it is possible that the procedure ends before the total
 number of epochs actually run.}
 }
 \value{
-fitted model of class \code{luz_module_fitted}
+fitted model of class \code{luz_module_fitted}.
+
+The modeling step has some assumptions about the file names.
+Images must be in a folder and have the pattern
+\verb{path/to/file/<id>_<lab>.<ext>}, where:
+\itemize{
+\item \verb{<id>}: can be any name, preferably without accents or other
+special characters, to avoid encoding issues. It usually contains a
+name for the type and a hash to identify the image uniquely.
+\strong{Note}: When annotating a file, the id must be unique, as two
+Captchas can have the same label.
+\item \verb{<lab>}: is the Captcha label. It is a string of characters between
+\verb{[a-zA-Z0-9]}, which can be case-sensitive if necessary.
+All labels must have the same length.
+\item \verb{<ext>}: file extension. It can be \code{.png}, \code{.jpeg} or \code{.jpg}.
+The operations also work for the \code{.svg} format, but it may have
+problems due to the image's transparency.
+}
+
+An important note is that the model stops fitting after 20 iterations
+without significant increment of accuracy (chosen as 1\%; for more
+details, see \code{vignette("advanced")}.
 }
 \description{
-Fit Captcha model
+Provides a basic interface for fitting custom models from a fully labeled
+data. Annotation can be done manually using the \code{\link[=captcha_annotate]{captcha_annotate()}}
+function presented earlier or with another method developed by the user.
+The model uses a convolutional neural network architecture, similar
+to the LeNet-5 model.
 }

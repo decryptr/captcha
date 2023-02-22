@@ -7,12 +7,18 @@
 \method{print}{captcha}(x, ...)
 }
 \arguments{
-\item{x}{Captcha object read with \code{\link[=read_captcha]{read_captcha()}}}
+\item{x}{Captcha object read with \code{\link[=read_captcha]{read_captcha()}}.}
 
-\item{...}{\itemize{
-\item 
-}}
+\item{...}{not used.}
 }
 \description{
-Print information about a captcha
+This function prints the image as a \code{magick-image} object on the screen.
+}
+\details{
+The \code{captcha} object is a list with three elements: \verb{$img}, which contains
+the image read from the \code{{magick}} package; \verb{$lab}, which contains the
+image label (by default, \code{NULL}); and \verb{$path}, which contains the path
+of the image.
+
+The print method gets the \verb{$img} element from this list and prints it.
 }

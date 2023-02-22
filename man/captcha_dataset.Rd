@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{captcha_dataset}
 \alias{captcha_dataset}
-\title{Captcha datasets}
+\title{Captcha dataset}
 \usage{
 captcha_dataset(
   root,
@@ -16,14 +16,44 @@ captcha_dataset(
 
 \item{transform_image}{(callable, optional): A function/transform
 that takes in an file path and returns an torch tensor prepared
-to feed the model.}
+to feed the model. By default, uses the \code{\link[=captcha_transform_image]{captcha_transform_image()}}
+function.}
 
 \item{transform_label}{(callable, optional): A function/transform
-that takes in the file paths and transform them.}
+that takes in the file paths and transform them. By default, uses the
+\code{\link[=captcha_transform_label]{captcha_transform_label()}} function.}
 
 \item{augmentation}{(function, optional) If not \code{NULL}, applies a
-function to augment data with randomized preprocessing layers.}
+function to augment data with randomized preprocessing layers.
+
+This is an object of class \code{dataset_generator} created using
+\code{\link[torch:dataset]{torch::dataset()}} function. It has a \code{initialize()} method that
+takes a directory containing the input images,
+then assigns all the information in-memory with the array data
+structure for the response variable. It also has a \code{.getitem()} method that
+correctly extracts one observation of the dataset in this data
+structure, and a \code{.length()} method that correctly calculates the
+number of Captchas of the dataset.
+
+The function calculates the vocabulary based on the identified values in
+the dataset.}
 }
 \description{
-Captcha datasets
+This object implements a dataset using the \code{\link[torch:dataset]{torch::dataset()}} framework.
+It loads all the images in torch tensors, as well as the labels.
+}
+\examples{
+annotated_folder <- system.file(
+  "examples/annotated_captcha",
+  package = "captcha"
+)
+
+suppressMessages({
+  ds <- captcha_dataset(annotated_folder)
+})
+
+# gets the first item (the only item in the example)
+# returns a list with x and y torch tensors.
+ds$.getitem(1)
+
 }

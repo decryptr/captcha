@@ -7,10 +7,36 @@
 decrypt(files, model)
 }
 \arguments{
-\item{files}{files to read. Can be a character vector or an object of class \code{captcha}.}
+\item{files}{files to read. Can be either a character vector
+or an object of class \code{captcha}.}
 
 \item{model}{model of class \code{luz_module_fitted}}
 }
+\value{
+character vector of the predicted labels.
+}
 \description{
-Function to solve Captchas
+Returns a label for an image using a fitted model. The image can be either a
+character vector (of length one or more) or an object of class \code{captcha}.
+}
+\examples{
+
+captcha_file <- system.file(
+  "examples/captcha/cadesp.jpg",
+  package = "captcha"
+)
+
+cap <- read_captcha(captcha_file)
+
+if (interactive()) {
+  plot(cap)
+}
+
+# the code below uses access to the internet. If you want to run locally,
+# download the model object from the releases site.
+if (interactive()) {
+  model <- captcha_load_model("cadesp")
+  decrypt(cap, model_rfb)
+}
+
 }

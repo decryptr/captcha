@@ -7,5 +7,15 @@
 captcha_accuracy()
 }
 \description{
-Captcha accuracy metric
+This object is used to calculate the accuracy of the model in the
+fitting process. This object is used internally inside a \code{luz} workflow.
+}
+\details{
+This function is a generator created using \code{\link[luz:luz_metric]{luz::luz_metric()}} function.
+It has a \code{initialize()} method that sets the total number of instances
+and total number of correct predictions as zero. For any minibatch, it
+has an \code{update()} method that updates the total number of instances and
+total number of correct predictions with new data. Finally, it has a
+\code{compute()} method that calculates accuracy from the total number of
+correct predictions and total number of instances.
 }

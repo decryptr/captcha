@@ -11,6 +11,19 @@ captcha_transform_label(all_letters, vocab)
 
 \item{vocab}{unique tokens}
 }
+\value{
+torch tensor with dimensions \code{length(all_letters)}x\code{length(vocab)}
+containing only zeros and ones. All rows sum exactly one.
+}
 \description{
-File to response matrix (tensor)
+This function performs a one-hot encoding of the label, transform a label
+with \code{N} letters in a matrix of dimensions \code{N}x\code{length(vocab)}. All the
+labels must have the same length.
+}
+\examples{
+vocab <- letters
+resp <- captcha_transform_label(c("a","b","c","d","e"), vocab)
+class(resp)
+dim(resp)
+
 }

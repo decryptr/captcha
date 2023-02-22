@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{plot.captcha}
 \alias{plot.captcha}
-\title{Plot a captcha}
+\title{Plot a Captcha}
 \usage{
 \method{plot}{captcha}(x, y, ...)
 }
@@ -14,5 +14,34 @@
 \item{...}{Other arguments passed on to \code{\link[graphics:plot.default]{graphics::plot()}}}
 }
 \description{
-Plot a captcha
+This function plots a captcha object on the screen. It is a S3 method
+for the \code{\link[graphics:plot.default]{graphics::plot()}} function.
+}
+\details{
+The \code{plot()} function is a method of
+\href{https://adv-r.hadley.nz/s3.html}{class S3} from base R.
+The function facilitates the visualization of Captchas. The function
+receives a list of images (obtained with the \code{read_captcha()} function)
+and displays the Captcha visually.
+
+An interesting aspect of the \code{plot()} function is that it deals with a
+list of Captchas. It is useful when the goal is to view several Captchas
+in the image simultaneously. The next image shows an example.
+
+By default, the \code{plot()} function arranges the images into four columns.
+To change the default, one can modify the options using
+\code{options(captcha.print.cols = N)}, where \code{N} is the desired number of
+columns. The next image shows an example with two columns.
+
+When the list of Captchas is too long, the \code{plot()} function displays a
+maximum number of images accompanied by a message. By default, this
+number is 100, with 25 rows and four columns. One can override the option
+by combining the \verb{captcha.print.cols=} and \verb{captcha.print.rows=} options.
+
+It is possible to create subsets of \code{captcha} objects using the \code{[}
+operator. One can also use the \code{length()} function to measure the
+number of images.
+
+Finally, when the image has a label, the \code{plot()} function shows the
+label on the corner of the image.
 }

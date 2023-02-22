@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{captcha_generate}
 \alias{captcha_generate}
-\title{Generate captcha}
+\title{Generate R-Captcha}
 \usage{
 captcha_generate(
   write_disk = FALSE,
@@ -50,11 +50,12 @@ case letters and numbers}
 \item{p_lat}{probability to add LAT algorithm to image. Defaults to 0.}
 }
 \value{
-list containing two elements: imagemagick object and captcha
-value.
+object of class \code{captcha}, which is a list containing three elements:
+\code{image-magick} object and the label.
 }
 \description{
-Generates random captcha image
+Generates a custom captcha image using the \code{magick} package. We name this
+captcha as R-Captcha.
 }
 \examples{
 
