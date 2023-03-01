@@ -84,9 +84,3 @@ fitted <- model |>
   )
 
 luz::luz_save(fitted, "data-raw/trt_100.pt")
-
-# captcha::decrypt(
-#   "~/Documents/jtrecenti/captchaDownload/data-raw/trt/img_oracle/trt383813c7ea47_rd2kdb_1.jpeg",
-#   fitted
-# )
-
