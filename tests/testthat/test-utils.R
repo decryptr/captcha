@@ -56,19 +56,24 @@ test_that("plot captcha with annotation", {
 
   skip_if_knitr()
 
-  # from the testthat documentation
-  save_png <- function(code, width = 400, height = 400) {
-    path <- tempfile(fileext = ".png")
-    png(path, width = width, height = height)
-    on.exit(dev.off())
-    code
-    path
+  if (check_magick_ghostscript(error = FALSE)) {
+    # from the testthat documentation
+    save_png <- function(code, width = 400, height = 400) {
+      path <- tempfile(fileext = ".png")
+      png(path, width = width, height = height)
+      on.exit(dev.off())
+      code
+      path
+    }
+
+    f_captcha <- test_path("examples/tjpe_4wba3.png")
+    captcha <- read_captcha(f_captcha)
+
+    expect_snapshot_file(save_png(plot.captcha(captcha)), "plot_annotation.png")
+  } else {
+    expect_error(check_magick_ghostscript())
   }
 
-  f_captcha <- test_path("examples/tjpe_4wba3.png")
-  captcha <- read_captcha(f_captcha)
-
-  expect_snapshot_file(save_png(plot.captcha(captcha)), "plot_annotation.png")
 })
 
 test_that("subset and length works", {
