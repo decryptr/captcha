@@ -43,17 +43,10 @@ captcha_generate <- function(write_disk = FALSE,
                              p_lat = 0) {
 
 
-  gravity <- c(
-    "Center"#,
-    # "East",
-    # "NorthEast",
-    # "North",
-    # "NorthWest",
-    # "SouthEast",
-    # "South",
-    # "SouthWest",
-    # "West"
-  )
+  check_magick_ghostscript()
+
+  gravity <- "Center"
+
   fonts <- c(
     "sans", "mono", "serif", "Times", "Helvetica",
     "Trebuchet", "Georgia", "Palatino", "Comic Sans"

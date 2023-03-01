@@ -103,6 +103,7 @@ plot.captcha <- function(x, y, ...) {
   }
 
   if (!is.null(lab)) {
+    check_magick_ghostscript()
     img <- magick::image_annotate(
       img, lab,
       gravity = "northeast",

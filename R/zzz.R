@@ -16,3 +16,18 @@ skip_if_knitr <- function() {
   }
   invisible(TRUE)
 }
+
+check_magick_ghostscript <- function() {
+  has_ghostscript <- magick::magick_config()$ghostscript
+  if (!has_ghostscript) {
+    stop(paste(
+      "This package needs ImageMagick with ghostscript enabled",
+      "to run captcha_generate() and plot.captcha() functions.",
+      "Your ImageMagick installation does not have ghostscript. Please check",
+      "the {magick} package documentation for details on how to",
+      "install ImageMagick with full features:",
+      "https://docs.ropensci.org/magick/#installation.",
+      sep = "\n"
+    ))
+  }
+}
