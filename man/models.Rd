@@ -59,7 +59,7 @@ This list may be updated when new models are added to the release.
 }
 \examples{
 # run only with internet connection
-if (interactive()) {
+if (interactive() && torch::torch_is_installed()) {
 
   captcha_models_available()
 

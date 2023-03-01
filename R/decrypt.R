@@ -24,7 +24,7 @@
 #'
 #' # the code below uses access to the internet. If you want to run locally,
 #' # download the model object from the releases site.
-#' if (interactive()) {
+#' if (interactive() && torch::torch_is_installed()) {
 #'   model <- captcha_load_model("cadesp")
 #'   decrypt(cap, model_rfb)
 #' }

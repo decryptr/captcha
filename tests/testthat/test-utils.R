@@ -1,20 +1,17 @@
 test_that("print captcha as expected", {
 
-  skip_if_knitr()
-
+  # skip if running in knitr context
+  testthat::skip_if(isTRUE(getOption('knitr.in.progress')))
   f_captcha <- test_path("examples/tjpe.png")
   captcha <- read_captcha(f_captcha)
-
   expect_snapshot(print(captcha))
+
 })
 
 
 test_that("plot captcha as expected", {
 
   # from the testthat documentation
-
-  skip_if_knitr()
-
   save_png <- function(code, width = 400, height = 400) {
     path <- tempfile(fileext = ".png")
     png(path, width = width, height = height)
@@ -30,8 +27,6 @@ test_that("plot captcha as expected", {
 })
 
 test_that("plot captcha as expected, big images", {
-
-  skip_if_knitr()
 
   # from the testthat documentation
   save_png <- function(code, width = 400, height = 400) {
@@ -53,8 +48,6 @@ test_that("plot captcha as expected, big images", {
 })
 
 test_that("plot captcha with annotation", {
-
-  skip_if_knitr()
 
   if (check_magick_ghostscript(error = FALSE)) {
     # from the testthat documentation

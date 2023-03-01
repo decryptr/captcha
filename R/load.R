@@ -47,7 +47,7 @@
 #'
 #' @examples
 #' # run only with internet connection
-#' if (interactive()) {
+#' if (interactive() && torch::torch_is_installed()) {
 #'
 #'   captcha_models_available()
 #'

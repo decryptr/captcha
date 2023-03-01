@@ -30,35 +30,37 @@ calc_dim_img_one <- function(x, y) {
 #'
 #' @examples
 #'
-#' # raw image
-#' captcha_file <- system.file(
-#'   "examples/captcha/tjmg.jpeg",
-#'   package = "captcha"
-#' )
+#' if (torch::torch_is_installed()) {
+#'   # raw image
+#'   captcha_file <- system.file(
+#'     "examples/captcha/tjmg.jpeg",
+#'     package = "captcha"
+#'   )
 #'
-#' # initializes model. The output_ndigits, output_vocab_size and vocab
-#' # parameters are compatible to the TJMG Captcha.
-#' model <- net_captcha(
-#'   input_dim = c(32, 192),
-#'   output_ndigits = 5,
-#'   output_vocab_size = 10,
-#'   vocab = 0:9,
-#'   transform = captcha_transform_image,
-#'   dropout = c(.25, .25),
-#'   dense_units = 400
-#' )
-#' model
+#'   # initializes model. The output_ndigits, output_vocab_size and vocab
+#'   # parameters are compatible to the TJMG Captcha.
+#'   model <- net_captcha(
+#'     input_dim = c(32, 192),
+#'     output_ndigits = 5,
+#'     output_vocab_size = 10,
+#'     vocab = 0:9,
+#'     transform = captcha_transform_image,
+#'     dropout = c(.25, .25),
+#'     dense_units = 400
+#'   )
+#'   model
 #'
-#' transformed <- model$transform(captcha_file)
+#'   transformed <- model$transform(captcha_file)
 #'
-#' # tensor of size 1 x output_ndigits x output_vocab_size
-#' prediction <- model(transformed)
-#' dim(prediction)
+#'   # tensor of size 1 x output_ndigits x output_vocab_size
+#'   prediction <- model(transformed)
+#'   dim(prediction)
 #'
-#' # get the predicted labels
-#' # the model is awful, because it is not fitted yet.
-#' indices <- as.numeric(torch::torch_argmax(prediction, 3))
-#' label <- paste(model$vocab[indices], collapse = "")
+#'   # get the predicted labels
+#'   # the model is awful, because it is not fitted yet.
+#'   indices <- as.numeric(torch::torch_argmax(prediction, 3))
+#'   label <- paste(model$vocab[indices], collapse = "")
+#' }
 #'
 #' @export
 net_captcha <- torch::nn_module(

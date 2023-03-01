@@ -6,17 +6,6 @@ utils::globalVariables(c("super"))
   options(captcha.print.height = 150)
 }
 
-
-skip_if_knitr <- function() {
-  if (identical(Sys.getenv("NOT_ON_KNITR"), "")) {
-    testthat::skip(paste0(
-      "This test does not work when run inside knitr.",
-      "Set the NOT_ON_KNITR envvar to force this test"
-    ))
-  }
-  invisible(TRUE)
-}
-
 check_magick_ghostscript <- function(error = TRUE) {
   has_ghostscript <- magick::magick_config()$ghostscript
   if (!has_ghostscript) {

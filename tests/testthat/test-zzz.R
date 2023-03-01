@@ -12,16 +12,6 @@ test_that("test onload", {
 
 })
 
-test_that("skip if knitr", {
-
-  withr::local_envvar(NOT_ON_KNITR = "")
-  expect_condition(skip_if_knitr(), class = "skip")
-
-  withr::local_envvar(NOT_ON_KNITR = "1")
-  expect_true(skip_if_knitr())
-
-})
-
 test_that("ghostscript works", {
 
   has_ghostscript <- magick::magick_config()$ghostscript
