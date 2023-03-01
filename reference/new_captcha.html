@@ -60,7 +60,7 @@ download, annotate, fit a custom model and share the results.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_captcha</span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_captcha</span><span class="op">(</span><span class="va">path</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span>, open <span class="op">=</span> <span class="va">rstudio</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,6 +68,14 @@ download, annotate, fit a custom model and share the results.</p>
     <dl><dt>path</dt>
 <dd><p>A path. If it exists, it is used. If it does not exist,
 it is created, provided that the parent path exists.</p></dd>
+
+
+<dt>rstudio</dt>
+<dd><p>Use RStudio? Defaults to <code>TRUE</code>.</p></dd>
+
+
+<dt>open</dt>
+<dd><p>Open new RStudio project? Defaults to <code>rstudio</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
