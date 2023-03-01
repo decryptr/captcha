@@ -19,6 +19,9 @@ save_png <- function(code, width = 400, height = 400) {
 
 test_that("plot captcha as expected", {
 
+  skip_on_ci()
+  skip_on_cran()
+
   f_captcha <- test_path("examples/tjpe.png")
   captcha <- read_captcha(f_captcha)
 
@@ -26,6 +29,9 @@ test_that("plot captcha as expected", {
 })
 
 test_that("plot captcha as expected, big images", {
+
+  skip_on_ci()
+  skip_on_cran()
 
   f_captcha <- rep(test_path("examples/tjpe.png"), 110)
   captcha <- read_captcha(f_captcha)
@@ -36,6 +42,9 @@ test_that("plot captcha as expected, big images", {
 })
 
 test_that("plot captcha with annotation", {
+
+  skip_on_ci()
+  skip_on_cran()
 
   if (check_magick_ghostscript(error = FALSE)) {
     f_captcha <- test_path("examples/tjpe_4wba3.png")
