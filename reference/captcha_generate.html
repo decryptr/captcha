@@ -143,11 +143,10 @@ case letters and numbers</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># must have ghostscript enabled in ImageMagick</span></span></span>
 <span class="r-in"><span><span class="co"># run check_magick_ghostscript() for details.</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_magick_ghostscript</span><span class="op">(</span>error <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">magick</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/config.html" class="external-link">magick_config</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">ghostscript</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu">captcha_generate</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">captcha_generate</span><span class="op">(</span>n_chars <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_magick_ghostscript(error = FALSE):</span> could not find function "check_magick_ghostscript"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
