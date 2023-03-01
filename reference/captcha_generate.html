@@ -141,20 +141,13 @@ case letters and numbers</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">captcha_generate</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_magick_ghostscript():</span> This package needs ImageMagick with ghostscript enabled</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> to run captcha_generate() and plot.captcha() functions.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Your ImageMagick installation does not have ghostscript. Please check</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> the {magick} package documentation for details on how to</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> install ImageMagick with full features:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> https://docs.ropensci.org/magick/#installation.</span>
-<span class="r-in"><span><span class="fu">captcha_generate</span><span class="op">(</span>n_chars <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_magick_ghostscript():</span> This package needs ImageMagick with ghostscript enabled</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> to run captcha_generate() and plot.captcha() functions.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Your ImageMagick installation does not have ghostscript. Please check</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> the {magick} package documentation for details on how to</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> install ImageMagick with full features:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> https://docs.ropensci.org/magick/#installation.</span>
+<span class="r-in"><span><span class="co"># must have ghostscript enabled in ImageMagick</span></span></span>
+<span class="r-in"><span><span class="co"># run check_magick_ghostscript() for details.</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_magick_ghostscript</span><span class="op">(</span>error <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">captcha_generate</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">captcha_generate</span><span class="op">(</span>n_chars <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_magick_ghostscript(error = FALSE):</span> could not find function "check_magick_ghostscript"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
