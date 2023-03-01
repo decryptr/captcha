@@ -7,6 +7,5 @@ inst/example.R
 data-raw/*
 !data-raw/trt.R
 docs
-inst/doc
 /doc/
 /Meta/
