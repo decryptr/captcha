@@ -47,8 +47,6 @@ captcha_generate <- function(write_disk = FALSE,
                              p_lat = 0) {
 
 
-  check_magick_ghostscript()
-
   gravity <- "Center"
 
   fonts <- c(
@@ -92,25 +90,31 @@ captcha_generate <- function(write_disk = FALSE,
     box_color <- "none"
   }
 
-  m_text <- magick::image_annotate(
-    magick::image_blank(n_cols * 5, n_rows * 5),
-    text = captcha_value,
-    size = sample(seq(size - 2, size + 2), 1),
-    gravity = sample(gravity, 1),
-    color = txt_col,
-    degrees = ifelse(stats::runif(1) < p_rotate, sample(seq(-10, 10), 1), 0),
-    weight = sample(seq(400, 800), 1),
-    kerning = sample(seq(-2, 10), 1),
-    font = sample(fonts, 1),
-    style = sample(magick::style_types(), 1),
-    decoration = ifelse(stats::runif(1) < p_line, "LineThrough", "None"),
-    strokecolor = ifelse(
-      stats::runif(1) < p_stroke,
-      sample(grDevices::colors(), 1),
-      "none"
-    ),
-    boxcolor = box_color
-  ) |>
+  if (check_magick_ghostscript(error = FALSE)) {
+    m_text <- magick::image_annotate(
+      magick::image_blank(n_cols * 5, n_rows * 5),
+      text = captcha_value,
+      size = sample(seq(size - 2, size + 2), 1),
+      gravity = sample(gravity, 1),
+      color = txt_col,
+      degrees = ifelse(stats::runif(1) < p_rotate, sample(seq(-10, 10), 1), 0),
+      weight = sample(seq(400, 800), 1),
+      kerning = sample(seq(-2, 10), 1),
+      font = sample(fonts, 1),
+      style = sample(magick::style_types(), 1),
+      decoration = ifelse(stats::runif(1) < p_line, "LineThrough", "None"),
+      strokecolor = ifelse(
+        stats::runif(1) < p_stroke,
+        sample(grDevices::colors(), 1),
+        "none"
+      ),
+      boxcolor = box_color
+    )
+  } else {
+    m_text <- magick::image_blank(n_cols * 5, n_rows * 5)
+  }
+
+  m_text <- m_text |>
     magick::image_trim() |>
     magick::image_resize(stringr::str_glue("{n_cols}x{n_rows}"))
 
