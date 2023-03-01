@@ -7,7 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![Codecov test
+[![Code
 coverage](https://codecov.io/gh/decryptr/captcha/branch/master/graph/badge.svg)](https://app.codecov.io/gh/decryptr/captcha?branch=master)
 [![R-CMD-check](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml)
 [![CRAN
