@@ -211,6 +211,20 @@ Currently, the Captchas with available fitted models are `trf5`, `tjmg`, `trt`, 
 #| echo: false
 
 av_models <- captcha_available_models()
+
+description <- c(
+  "Centro de Apoio ao Desenvolvimento da Saúde Pública", 
+  "Tribunal de Justiça da Bahia", 
+  "Junta Comercial de São Paulo", 
+  "Receita Federal", 
+  "Sistema Eletrônico de Informações - ME", 
+  "Tribunal de Justiça de Minas Gerais", 
+  "Tribunal de Justiça de Pernambuco", 
+  "Tribunal de Justiça do Rio Grande do Sul", 
+  "Tribunal Regional Federal 5", 
+  "Tribunal Regional do Trabalho 3"
+)
+
 acc <- purrr::map_dbl(
   av_models,
   \(x) {
@@ -221,21 +235,22 @@ acc <- purrr::map_dbl(
   purrr::set_names(av_models) |> 
   tibble::enframe()
 
-doutorado::da_captchas |> 
-  
+fs::dir_ls("man/figures", regexp = "dados") |> 
+  tibble::enframe("name", "path") |> 
   dplyr::mutate(
-    exemplo = stringr::str_replace(exemplo, "assets/img", "man/figures"),
-    name = stringr::str_extract(site, "(?<=\\[)[0-9a-z]+")
+    name = basename(tools::file_path_sans_ext(name)),
+    name = stringr::str_remove(name, "dados_"),
+    img = stringr::str_glue("![Captcha {name}]({path})")
   ) |> 
   dplyr::inner_join(acc, "name") |> 
   dplyr::transmute(
-    site, 
-    exemplo, 
-    descricao, 
+    name,
+    img,
+    desc = description,
     acc = formattable::percent(value, 2)
   ) |> 
   knitr::kable(
-    col.names = c("Name/Link", "Example", "Description", "Accuracy")
+    col.names = c("Name", "Example", "Description", "Accuracy")
   )
 
 ```

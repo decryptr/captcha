@@ -244,18 +244,18 @@ Currently, the Captchas with available fitted models are `trf5`, `tjmg`,
 `trt`, `esaj`, `jucesp`, `tjpe`, `tjrs`, `cadesp`, `sei` and `rfb`. The
 table below describes the models and their accuracy.
 
-| Name/Link                                                                                                                                                                                 | Example                                                                   | Description                                         | Accuracy |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------|:----------------------------------------------------|---------:|
-| [trf5](https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam)                                                                                                                         | ![exemplo de Captcha da lista apresentada.](man/figures/dados_trf5.jpg)   | Tribunal Regional Federal 5                         |   98.77% |
-| [tjmg](https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&numero=1&listaProcessos=50718889720218130024&btn_pesquisar=Pesquisar)                                        | ![exemplo de Captcha da lista apresentada.](man/figures/dados_tjmg.jpeg)  | Tribunal de Justiça de Minas Gerais                 |   98.35% |
-| [trt](https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879)                                                                                                            | ![exemplo de Captcha da lista apresentada.](man/figures/dados_trt.jpeg)   | Tribunal Regional do Trabalho 3                     |   98.50% |
-| [esaj](http://esaj.tjba.jus.br/cpopg/open.do)                                                                                                                                             | ![exemplo de Captcha da lista apresentada.](man/figures/dados_esaj.png)   | Tribunal de Justiça da Bahia                        |   94.50% |
-| [jucesp](https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx)                                                                                                                          | ![exemplo de Captcha da lista apresentada.](man/figures/dados_jucesp.jpg) | Junta Comercial de São Paulo                        |   89.88% |
-| [tjpe](https://srv01.tjpe.jus.br/consultaprocessualunificada/)                                                                                                                            | ![exemplo de Captcha da lista apresentada.](man/figures/dados_tjpe.png)   | Tribunal de Justiça de Pernambuco                   |   91.88% |
-| [tjrs](https://www.tjrs.jus.br/site_php/consulta/verificador.php)                                                                                                                         | ![exemplo de Captcha da lista apresentada.](man/figures/dados_tjrs.jpg)   | Tribunal de Justiça do Rio Grande do Sul            |   99.57% |
-| [cadesp](https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx)                                                | ![exemplo de Captcha da lista apresentada.](man/figures/dados_cadesp.jpg) | Centro de Apoio ao Desenvolvimento da Saúde Pública |   96.37% |
-| [sei](https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&acao_origem_externa=protocolo_pesquisar&id_orgao_acesso_externo=0) | ![exemplo de Captcha da lista apresentada.](man/figures/dados_sei.png)    | Sistema Eletrônico de Informações - ME              |   77.25% |
-| [rfb](https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp)                                                                                              | ![exemplo de Captcha da lista apresentada.](man/figures/dados_rfb.png)    | Receita Federal                                     |   95.70% |
+| Name   | Example                                         | Description                                         | Accuracy |
+|:-------|:------------------------------------------------|:----------------------------------------------------|---------:|
+| cadesp | ![Captcha cadesp](man/figures/dados_cadesp.jpg) | Centro de Apoio ao Desenvolvimento da Saúde Pública |   96.37% |
+| esaj   | ![Captcha esaj](man/figures/dados_esaj.png)     | Tribunal de Justiça da Bahia                        |   94.50% |
+| jucesp | ![Captcha jucesp](man/figures/dados_jucesp.jpg) | Junta Comercial de São Paulo                        |   89.88% |
+| rfb    | ![Captcha rfb](man/figures/dados_rfb.png)       | Receita Federal                                     |   95.70% |
+| sei    | ![Captcha sei](man/figures/dados_sei.png)       | Sistema Eletrônico de Informações - ME              |   77.25% |
+| tjmg   | ![Captcha tjmg](man/figures/dados_tjmg.jpeg)    | Tribunal de Justiça de Minas Gerais                 |   98.35% |
+| tjpe   | ![Captcha tjpe](man/figures/dados_tjpe.png)     | Tribunal de Justiça de Pernambuco                   |   91.88% |
+| tjrs   | ![Captcha tjrs](man/figures/dados_tjrs.jpg)     | Tribunal de Justiça do Rio Grande do Sul            |   99.57% |
+| trf5   | ![Captcha trf5](man/figures/dados_trf5.jpg)     | Tribunal Regional Federal 5                         |   98.77% |
+| trt    | ![Captcha trt](man/figures/dados_trt.jpeg)      | Tribunal Regional do Trabalho 3                     |   98.50% |
 
 ### Fit custom model
 
