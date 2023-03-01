@@ -25,7 +25,7 @@
 #'
 #' # must have ghostscript enabled in ImageMagick
 #' # run check_magick_ghostscript() for details.
-#' if (check_magick_ghostscript(error = FALSE)) {
+#' if (magick::magick_config()$ghostscript) {
 #'   captcha_generate()
 #'   captcha_generate(n_chars = 5)
 #' }
