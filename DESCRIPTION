@@ -1,14 +1,16 @@
 Package: captcha
-Title: Solve Captchas Using Torch
+Title: Solve Text on Image Computer Vision Challenges
 Version: 0.1.0.9000
 Authors@R: 
     c(person('Julio', 'Trecenti', 
              email = 'julio.trecenti@gmail.com', 
              role = c('cre', 'aut'),
              comment = c(ORCID = "0000-0002-1680-6389")))
-Description: This package helps to download, visualize and solve captchas.
-  It is built as an extensible API so anyone can contribute with their
-  own captcha-solving code.
+Description: Completely Automated Public Turing test to tell 
+  Computers and Humans Apart (Captchas) are tests designed to determine whether 
+  the user is human. This package helps to create, visualize and solve text 
+  based Captchas automatically. The package contains an extensible API so 
+  anyone can contribute with new solutions.
 Depends: 
     R (>= 4.1.0)
 License: MIT + file LICENSE
