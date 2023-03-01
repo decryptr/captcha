@@ -121,51 +121,37 @@ as a predictive function and as the input to a luz fitting workflow.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># raw image</span></span></span>
-<span class="r-in"><span><span class="va">captcha_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="st">"examples/captcha/tjmg.jpeg"</span>,</span></span>
-<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"captcha"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/torch/man/torch_is_installed.html" class="external-link">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># raw image</span></span></span>
+<span class="r-in"><span>  <span class="va">captcha_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"examples/captcha/tjmg.jpeg"</span>,</span></span>
+<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"captcha"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># initializes model. The output_ndigits, output_vocab_size and vocab</span></span></span>
-<span class="r-in"><span><span class="co"># parameters are compatible to the TJMG Captcha.</span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">net_captcha</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  input_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">192</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  output_ndigits <span class="op">=</span> <span class="fl">5</span>,</span></span>
-<span class="r-in"><span>  output_vocab_size <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>  vocab <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">9</span>,</span></span>
-<span class="r-in"><span>  transform <span class="op">=</span> <span class="va">captcha_transform_image</span>,</span></span>
-<span class="r-in"><span>  dropout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.25</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  dense_units <span class="op">=</span> <span class="fl">400</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">model</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> An `nn_module` containing 1,204,296 parameters.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Modules ─────────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm0: &lt;nn_batch_norm2d&gt; #6 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • conv1: &lt;nn_conv2d&gt; #896 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm1: &lt;nn_batch_norm2d&gt; #64 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • conv2: &lt;nn_conv2d&gt; #18,496 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm2: &lt;nn_batch_norm2d&gt; #128 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • conv3: &lt;nn_conv2d&gt; #36,928 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm3: &lt;nn_batch_norm2d&gt; #128 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • dropout1: &lt;nn_dropout&gt; #0 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • dropout2: &lt;nn_dropout&gt; #0 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • fc1: &lt;nn_linear&gt; #1,126,800 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • batchnorm_dense: &lt;nn_batch_norm1d&gt; #800 parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • fc2: &lt;nn_linear&gt; #20,050 parameters</span>
+<span class="r-in"><span>  <span class="co"># initializes model. The output_ndigits, output_vocab_size and vocab</span></span></span>
+<span class="r-in"><span>  <span class="co"># parameters are compatible to the TJMG Captcha.</span></span></span>
+<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">net_captcha</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    input_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">192</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    output_ndigits <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>    output_vocab_size <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>    vocab <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">9</span>,</span></span>
+<span class="r-in"><span>    transform <span class="op">=</span> <span class="va">captcha_transform_image</span>,</span></span>
+<span class="r-in"><span>    dropout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.25</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    dense_units <span class="op">=</span> <span class="fl">400</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">model</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">transformed</span> <span class="op">&lt;-</span> <span class="va">model</span><span class="op">$</span><span class="fu">transform</span><span class="op">(</span><span class="va">captcha_file</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">transformed</span> <span class="op">&lt;-</span> <span class="va">model</span><span class="op">$</span><span class="fu">transform</span><span class="op">(</span><span class="va">captcha_file</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># tensor of size 1 x output_ndigits x output_vocab_size</span></span></span>
-<span class="r-in"><span><span class="va">prediction</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">transformed</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">prediction</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  5 10</span>
+<span class="r-in"><span>  <span class="co"># tensor of size 1 x output_ndigits x output_vocab_size</span></span></span>
+<span class="r-in"><span>  <span class="va">prediction</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">transformed</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">prediction</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># get the predicted labels</span></span></span>
-<span class="r-in"><span><span class="co"># the model is awful, because it is not fitted yet.</span></span></span>
-<span class="r-in"><span><span class="va">indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/torch/man/torch_argmax.html" class="external-link">torch_argmax</a></span><span class="op">(</span><span class="va">prediction</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">vocab</span><span class="op">[</span><span class="va">indices</span><span class="op">]</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># get the predicted labels</span></span></span>
+<span class="r-in"><span>  <span class="co"># the model is awful, because it is not fitted yet.</span></span></span>
+<span class="r-in"><span>  <span class="va">indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/torch/man/torch_argmax.html" class="external-link">torch_argmax</a></span><span class="op">(</span><span class="va">prediction</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">vocab</span><span class="op">[</span><span class="va">indices</span><span class="op">]</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
