@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   advanced: advanced.html
-last_built: 2023-03-01T17:02Z
+last_built: 2023-03-01T18:08Z
 urls:
   reference: https://decryptr.github.io/captcha/reference
   article: https://decryptr.github.io/captcha/articles
