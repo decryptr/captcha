@@ -59,7 +59,11 @@ captcha as R-Captcha.
 }
 \examples{
 
-captcha_generate()
-captcha_generate(n_chars = 5)
+# must have ghostscript enabled in ImageMagick
+# run check_magick_ghostscript() for details.
+if (check_magick_ghostscript(error = FALSE)) {
+  captcha_generate()
+  captcha_generate(n_chars = 5)
+}
 
 }
