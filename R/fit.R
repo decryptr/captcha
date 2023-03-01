@@ -14,7 +14,7 @@
 #' @param dense_units number of dense units to use after convolution steps.
 #'   Defaults to 200.
 #' @param decay Weight decay applied each epoch.
-#' @param batch_size Minibatch size. Default 40.
+#' @param batch_size Mini batch size. Default 40.
 #' @param epochs Number of epochs to use. Default 100. The model uses early
 #'   stopping, so it is possible that the procedure ends before the total
 #'   number of epochs actually run.

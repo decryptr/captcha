@@ -20,7 +20,7 @@ calc_dim_img_one <- function(x, y) {
 #' @param input_dim (integer, integer): image input dimensions.
 #' @param output_ndigits number of tokens for each Captcha.
 #' @param output_vocab_size number of unique token values.
-#' @param vocab token labels
+#' @param vocab token labels.
 #' @param transform input transform function (for prediction purposes)
 #' @param dropout (float, float) AlexNet dropout values.
 #' @param dense_units Number of dense units

@@ -5,7 +5,7 @@
 #'
 #' This function is a generator created using [luz::luz_metric()] function.
 #' It has a `initialize()` method that sets the total number of instances
-#' and total number of correct predictions as zero. For any minibatch, it
+#' and total number of correct predictions as zero. For any mini batch, it
 #' has an `update()` method that updates the total number of instances and
 #' total number of correct predictions with new data. Finally, it has a
 #' `compute()` method that calculates accuracy from the total number of

@@ -10,11 +10,11 @@
 #' @param n_chars captcha length. Defaults to 4.
 #' @param n_rows,n_cols image dimensions. Defaults to 60x120 image.
 #' @param p_rotate probability to add rotation. Defaults to 80%.
-#' @param p_line probability to add strikethrough line. Defaults to 80%.
+#' @param p_line probability to add strike through line. Defaults to 80%.
 #' @param p_stroke probability to add stroke color. Defaults to 30%.
 #' @param p_box probability to add bounding box to text. Defaults to 30%.
 #' @param p_implode probability to add imploding effect. Defaults to 20%.
-#' @param p_oilpaint probability to add oilpaint effect. Defaults to 0.
+#' @param p_oilpaint probability to add oil paint effect. Defaults to 0.
 #' @param p_noise probability to add random noise to image. Defaults to 40%.
 #' @param p_lat probability to add LAT algorithm to image. Defaults to 0.
 #'

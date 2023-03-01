@@ -2,7 +2,7 @@
 #'
 #' This function uses the `torchvision` package to read and transform the
 #' image in a torch tensor. The function tries to adjust the dimensions to
-#' deal with black and white or coloured images.
+#' deal with black and white or colored images.
 #'
 #' @param x character vector with the paths to image files.
 #' @param input_dim resize image to dimension. Defaults to 32x192, which is

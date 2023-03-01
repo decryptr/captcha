@@ -9,7 +9,7 @@
 #' The `captcha_load_model()` function downloads a model using
 #' [piggyback::pb_download()] and returns a `luz_module_fitted` object.
 #'
-#' @param repo repo in the form `"<user>/<captcha>"`.
+#' @param repo repository in the form `"<user>/<captcha>"`.
 #'   Defaults to `"decryptr/captcha"`
 #' @param tag tag name of the release to load the file.
 #'
