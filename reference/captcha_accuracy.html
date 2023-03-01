@@ -64,7 +64,7 @@ fitting process. This object is used internally inside a <code>luz</code> workfl
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function is a generator created using <code><a href="https://mlverse.github.io/luz/reference/luz_metric.html" class="external-link">luz::luz_metric()</a></code> function.
 It has a <code>initialize()</code> method that sets the total number of instances
-and total number of correct predictions as zero. For any minibatch, it
+and total number of correct predictions as zero. For any mini batch, it
 has an <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code> method that updates the total number of instances and
 total number of correct predictions with new data. Finally, it has a
 <code>compute()</code> method that calculates accuracy from the total number of
