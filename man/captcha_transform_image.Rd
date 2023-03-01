@@ -18,7 +18,7 @@ torch tensor with dimensions \code{length(x)}x\code{3}x\code{input_dim}.
 \description{
 This function uses the \code{torchvision} package to read and transform the
 image in a torch tensor. The function tries to adjust the dimensions to
-deal with black and white or coloured images.
+deal with black and white or colored images.
 }
 \examples{
 

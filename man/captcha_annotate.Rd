@@ -4,14 +4,14 @@
 \alias{captcha_annotate}
 \title{Annotate captchas with their labels}
 \usage{
-captcha_annotate(files, labels = NULL, path = NULL, rm_old = FALSE)
+captcha_annotate(files, labels = stdin(), path = NULL, rm_old = FALSE)
 }
 \arguments{
 \item{files}{Either an object of class \code{captcha} or a character vector
 with the paths to captcha files}
 
-\item{labels}{Either \code{NULL} (for interactive classification) or
-a character vector with labels for the Captchas. See details.}
+\item{labels}{Either \code{stdin()} (the default, for interactive classification)
+or a character vector with labels for the Captchas. See details.}
 
 \item{path}{Where to save the annotated captcha files.
 If \code{NULL}, saves the files in the same folder the unanswered counterparts.}
@@ -24,7 +24,7 @@ A vector with the paths of the modified files.
 }
 \description{
 Given one or more Captchas, this function
-prompts the user to solve them mannually to train a model.
+prompts the user to solve them manually to train a model.
 Annotated captchas are saved at \code{path}
 with their labels in the filename separated by an underscore.
 }

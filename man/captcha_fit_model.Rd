@@ -30,7 +30,7 @@ Defaults to 200.}
 
 \item{decay}{Weight decay applied each epoch.}
 
-\item{batch_size}{Minibatch size. Default 40.}
+\item{batch_size}{Mini batch size. Default 40.}
 
 \item{epochs}{Number of epochs to use. Default 100. The model uses early
 stopping, so it is possible that the procedure ends before the total

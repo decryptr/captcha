@@ -11,7 +11,7 @@ captcha_available_models(repo = "decryptr/captcha", tag = "captcha_model")
 captcha_load_model(captcha, repo = "decryptr/captcha", tag = "captcha_model")
 }
 \arguments{
-\item{repo}{repo in the form \code{"<user>/<captcha>"}.
+\item{repo}{repository in the form \code{"<user>/<captcha>"}.
 Defaults to \code{"decryptr/captcha"}}
 
 \item{tag}{tag name of the release to load the file.}

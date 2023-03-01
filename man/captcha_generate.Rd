@@ -35,7 +35,7 @@ case letters and numbers}
 
 \item{p_rotate}{probability to add rotation. Defaults to 80\%.}
 
-\item{p_line}{probability to add strikethrough line. Defaults to 80\%.}
+\item{p_line}{probability to add strike through line. Defaults to 80\%.}
 
 \item{p_stroke}{probability to add stroke color. Defaults to 30\%.}
 
@@ -43,7 +43,7 @@ case letters and numbers}
 
 \item{p_implode}{probability to add imploding effect. Defaults to 20\%.}
 
-\item{p_oilpaint}{probability to add oilpaint effect. Defaults to 0.}
+\item{p_oilpaint}{probability to add oil paint effect. Defaults to 0.}
 
 \item{p_noise}{probability to add random noise to image. Defaults to 40\%.}
 

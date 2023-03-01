@@ -21,7 +21,7 @@ net_captcha(
 
 \item{output_vocab_size}{number of unique token values.}
 
-\item{vocab}{token labels}
+\item{vocab}{token labels.}
 
 \item{transform}{input transform function (for prediction purposes)}
 
