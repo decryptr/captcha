@@ -1,17 +1,44 @@
 #' Fit Captcha model
 #'
+#' Provides a basic interface for fitting custom models from a fully labeled
+#' data. Annotation can be done manually using the [captcha_annotate()]
+#' function presented earlier or with another method developed by the user.
+#' The model uses a convolutional neural network architecture, similar
+#' to the LeNet-5 model.
+#'
 #' @param dir directory where the classified images are
 #' @param dir_valid (optional) directory to validation files
-#' @param prop_valid proportion of total images considered to validation. Default 0.2.
+#' @param prop_valid proportion of total images considered to validation.
+#'   Defaults to 0.2.
 #' @param dropout dropout hyperparameter. Default 0.25.
-#' @param dense_units number of dense units to use after convolution steps. Default 200.
+#' @param dense_units number of dense units to use after convolution steps.
+#'   Defaults to 200.
 #' @param decay Weight decay applied each epoch.
 #' @param batch_size Minibatch size. Default 40.
 #' @param epochs Number of epochs to use. Default 100. The model uses early
 #'   stopping, so it is possible that the procedure ends before the total
 #'   number of epochs actually run.
 #'
-#' @return fitted model of class `luz_module_fitted`
+#' @return fitted model of class `luz_module_fitted`.
+#'
+#' The modeling step has some assumptions about the file names.
+#' Images must be in a folder and have the pattern
+#' `path/to/file/<id>_<lab>.<ext>`, where:
+#' * `<id>`: can be any name, preferably without accents or other
+#'   special characters, to avoid encoding issues. It usually contains a
+#'   name for the type and a hash to identify the image uniquely.
+#'   __Note__: When annotating a file, the id must be unique, as two
+#'   Captchas can have the same label.
+#' * `<lab>`: is the Captcha label. It is a string of characters between
+#'   `[a-zA-Z0-9]`, which can be case-sensitive if necessary.
+#'   All labels must have the same length.
+#' * `<ext>`: file extension. It can be `.png`, `.jpeg` or `.jpg`.
+#'   The operations also work for the `.svg` format, but it may have
+#'   problems due to the image's transparency.
+#'
+#' An important note is that the model stops fitting after 20 iterations
+#' without significant increment of accuracy (chosen as 1%; for more
+#' details, see `vignette("advanced")`.
 #'
 #' @export
 captcha_fit_model <- function(dir,

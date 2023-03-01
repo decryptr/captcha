@@ -4,7 +4,7 @@
 parm <- list(
   # Captcha parameters
   captcha_name = "my_captcha",  # Captcha name
-  input_dim = c(32L, 192L),     # Resize Captcha images. Usually we don't change this
+  input_dim = c(32L, 192L),     # Resize images. Usually don't change this
   output_vocab_size = 10L,      # Size of the vocabulary
   vocab = 0:9,                  # Character vector with the vocabulary
   output_ndigits = 4L,          # Length of the Captcha images
@@ -16,8 +16,8 @@ parm <- list(
 
   # Model parameters
   n_epochs = 100L,              # Number of epochs
-  dense_units = 200L,           # Number of dense units to use after convolution steps.
-  dropout = c(0.25, 0.25),      # Dropout hyperparameter applied after convolution steps.
+  dense_units = 200L,           # Number of dense units after convolution steps
+  dropout = c(0.25, 0.25),      # Dropout hyperparameter after convolution steps
   decay = 0.99,                 # Weight decay applied each epoch
   learning_rate = .01,          # Learning rate
 
@@ -68,7 +68,7 @@ captcha_dl_valid <- torch::dataloader(
 
 # model -------------------------------------------------------------------
 
-# The net_captcha module contains the model defined inside the {captcha} package.
+# The net_captcha module contains model defined inside the {captcha} package.
 # One can create custom models from this description
 # Code here: https://github.com/decryptr/captcha/blob/master/R/model.R#L91
 

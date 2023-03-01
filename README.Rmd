@@ -210,14 +210,15 @@ Currently, the Captchas with available fitted models are `trf5`, `tjmg`, `trt`, 
 #| message: false
 #| echo: false
 
+av_models <- captcha_available_models()
 acc <- purrr::map_dbl(
-  available_models(),
+  av_models,
   \(x) {
     model <- captcha_load_model(x)
     dplyr::last(model$records$metrics$valid)[["captcha acc"]]
   }
 ) |> 
-  purrr::set_names(available_models()) |> 
+  purrr::set_names(av_models) |> 
   tibble::enframe()
 
 doutorado::da_captchas |> 
@@ -262,7 +263,7 @@ The `captcha_fit_model()` function also has some parameters related to the neura
 - `decay=`: the learning rate decay percentage (by default, 0.99); 
 - `epochs=`: the number of epochs to fit the model (by default, 100).
 
-An important note is that the model stops fitting after 20 iterations without significant increment of accuracy (chosen as 1%; for more details, see the [advanced guide](TODO)).
+An important note is that the model stops fitting after 20 iterations without significant increment of accuracy (chosen as 1%; for more details, see the [advanced guide](https://decryptr.github.io/captcha/articles/advanced.html)).
 
 The function returns a fitted model of class `luz_module_fitted`, which can be saved to disk using `luz_save()`. One can also serialize the model to use it with other packages such as PyTorch. A tutorial on serialization can be found in the [torch package documentation](https://torch.mlverse.org/docs/articles/serialization.html).
 

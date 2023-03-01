@@ -29,6 +29,48 @@ net_captcha(
 
 \item{dense_units}{Number of dense units}
 }
+\value{
+object of classes \code{CAPTCHA-CNN} and \code{nn_module}. It works
+as a predictive function and as the input to a luz fitting workflow.
+}
 \description{
-Net captcha
+This is a torch module with This is a simple CNN with three convolutional
+layers and two dense layers. It works well with the default dimensions
+32x192 from the \code{\link[=captcha_transform_image]{captcha_transform_image()}} function. It also uses batch
+normalization in the forward method. This function can be used either
+to fit a Captcha model using the \code{luz} workflow suggested in
+\code{vignette("advanced")} or as a base code to develop custom models.
+}
+\examples{
+
+# raw image
+captcha_file <- system.file(
+  "examples/captcha/tjmg.jpeg",
+  package = "captcha"
+)
+
+# initializes model. The output_ndigits, output_vocab_size and vocab
+# parameters are compatible to the TJMG Captcha.
+model <- net_captcha(
+  input_dim = c(32, 192),
+  output_ndigits = 5,
+  output_vocab_size = 10,
+  vocab = 0:9,
+  transform = captcha_transform_image,
+  dropout = c(.25, .25),
+  dense_units = 400
+)
+model
+
+transformed <- model$transform(captcha_file)
+
+# tensor of size 1 x output_ndigits x output_vocab_size
+prediction <- model(transformed)
+dim(prediction)
+
+# get the predicted labels
+# the model is awful, because it is not fitted yet.
+indices <- as.numeric(torch::torch_argmax(prediction, 3))
+label <- paste(model$vocab[indices], collapse = "")
+
 }

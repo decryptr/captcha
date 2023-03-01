@@ -11,3 +11,13 @@ test_that("test onload", {
   expect_type(getOption("captcha.print.height"), "double")
 
 })
+
+test_that("skip if knitr", {
+
+  withr::local_envvar(NOT_ON_KNITR = "")
+  expect_condition(skip_if_knitr(), class = "skip")
+
+  withr::local_envvar(NOT_ON_KNITR = "1")
+  expect_true(skip_if_knitr())
+
+})

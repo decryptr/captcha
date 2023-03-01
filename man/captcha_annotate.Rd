@@ -11,20 +11,28 @@ captcha_annotate(files, labels = NULL, path = NULL, rm_old = FALSE)
 with the paths to captcha files}
 
 \item{labels}{Either \code{NULL} (for interactive classification) or
-a character vector with labels for the Captchas}
+a character vector with labels for the Captchas. See details.}
 
 \item{path}{Where to save the annotated captcha files.
 If \code{NULL}, saves the files in the same folder the unanswered counterparts.}
 
 \item{rm_old}{Whether or not to delete unanswered captchas after
-copying and renaming them}
+copying and renaming them.}
 }
 \value{
-A character vector with the paths to the newly created files
+A vector with the paths of the modified files.
 }
 \description{
 Given one or more Captchas, this function
-prompts you to solve them mannually so that later you can train
-a model with those labels. Annotated captchas are saved at \code{path}
+prompts the user to solve them mannually to train a model.
+Annotated captchas are saved at \code{path}
 with their labels in the filename separated by an underscore.
+}
+\details{
+The \verb{labels=}
+parameter can handle situations where one knows the Captcha label.
+For example, a workflow that uses an oracle might provide the
+label automatically. When the label doesn't exist,
+the \code{captcha_annotate()} function opens the prompt for classification
+and shows the image using \code{plot()}.
 }

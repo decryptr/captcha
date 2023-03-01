@@ -303,7 +303,8 @@ the neural network. They are:
 
 An important note is that the model stops fitting after 20 iterations
 without significant increment of accuracy (chosen as 1%; for more
-details, see the [advanced guide](TODO)).
+details, see the [advanced
+guide](https://decryptr.github.io/captcha/articles/advanced.html)).
 
 The function returns a fitted model of class `luz_module_fitted`, which
 can be saved to disk using `luz_save()`. One can also serialize the

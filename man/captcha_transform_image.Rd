@@ -7,10 +7,31 @@
 captcha_transform_image(x, input_dim = c(32L, 192L))
 }
 \arguments{
-\item{x}{file path}
+\item{x}{character vector with the paths to image files.}
 
-\item{input_dim}{resize image to dimension}
+\item{input_dim}{resize image to dimension. Defaults to 32x192, which is
+a good default for many Captcha applications.}
+}
+\value{
+torch tensor with dimensions \code{length(x)}x\code{3}x\code{input_dim}.
 }
 \description{
-File to torch tensor
+This function uses the \code{torchvision} package to read and transform the
+image in a torch tensor. The function tries to adjust the dimensions to
+deal with black and white or coloured images.
+}
+\examples{
+
+if (!torch::torch_is_installed()) {
+  torch::install_torch()
+}
+
+captcha_file <- fs::dir_ls(
+  system.file("examples/captcha/", package = "captcha"
+))
+
+result <- captcha_transform_image(captcha_file)
+class(result)
+dim(result)
+
 }

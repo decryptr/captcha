@@ -1,5 +1,16 @@
 #' Captcha accuracy metric
 #'
+#' This object is used to calculate the accuracy of the model in the
+#' fitting process. This object is used internally inside a `luz` workflow.
+#'
+#' This function is a generator created using [luz::luz_metric()] function.
+#' It has a `initialize()` method that sets the total number of instances
+#' and total number of correct predictions as zero. For any minibatch, it
+#' has an `update()` method that updates the total number of instances and
+#' total number of correct predictions with new data. Finally, it has a
+#' `compute()` method that calculates accuracy from the total number of
+#' correct predictions and total number of instances.
+#'
 #' @export
 captcha_accuracy <- luz::luz_metric(
   abbrev = "Captcha Acc",

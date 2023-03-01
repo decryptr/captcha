@@ -18,7 +18,13 @@ test_that("one hot encoding works", {
   res <- captcha_transform_label(all_letters, vocab)
 
   expect_s3_class(res, "torch_tensor")
-  expect_equal(dim(res), c(length(all_letters), length(all_letters[[1]][[1]]), length(unique(vocab))))
+  expect_equal(
+    dim(res),
+    c(
+      length(all_letters),
+      length(all_letters[[1]][[1]]), length(unique(vocab))
+    )
+  )
   expect_equal(as.numeric(sum(res)), length(unlist(all_letters)))
 
 

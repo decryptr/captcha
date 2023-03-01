@@ -1,6 +1,7 @@
-#' Generate captcha
+#' Generate R-Captcha
 #'
-#' Generates random captcha image
+#' Generates a custom captcha image using the `magick` package. We name this
+#' captcha as R-Captcha.
 #'
 #' @param write_disk write image to disk? Defaults to `FALSE`.
 #' @param path path to save images. Defaults to current directory.
@@ -17,8 +18,8 @@
 #' @param p_noise probability to add random noise to image. Defaults to 40%.
 #' @param p_lat probability to add LAT algorithm to image. Defaults to 0.
 #'
-#' @return list containing two elements: imagemagick object and captcha
-#'   value.
+#' @return object of class `captcha`, which is a list containing three elements:
+#' `image-magick` object and the label.
 #'
 #' @examples
 #'

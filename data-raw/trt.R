@@ -5,7 +5,7 @@ library(magrittr)
 
 # paths -------------------------------------------------------------------
 
-path_data <- "/home/jtrecenti/Documents/captchaDownload/data-raw/trt/img_oracle/"
+path_data <- "captchaDownload/data-raw/trt/img_oracle/"
 # path_data <- "/var/tmp/jtrecenti/img_oracle"
 path_log <- "data-raw/trt.log"
 # path_log <- args[2]

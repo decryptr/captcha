@@ -36,13 +36,15 @@ test_that("load remote model", {
 
 test_that("available models", {
 
-  models <- available_models()
+  models <- captcha_available_models()
 
   remote_models <- piggyback::pb_list(
     repo = "decryptr/captcha",
     tag = "captcha_model"
   )
 
-  expect_true(all(models %in% tools::file_path_sans_ext(remote_models$file_name)))
+  expect_true(
+    all(models %in% tools::file_path_sans_ext(remote_models$file_name))
+  )
 
 })

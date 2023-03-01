@@ -13,11 +13,27 @@ read_captcha(files, lab_in_path = FALSE)
 in the paths to the files (separated by and underscore in the filename)}
 }
 \value{
-A list of captcha objects
+A list of class \code{captcha}. The \code{captcha} object is a list with
+three elements: \verb{$img}, which contains the image read from the \code{{magick}}
+package; \verb{$lab}, which contains the image label (by default, \code{NULL}); and
+\verb{$path}, which contains the path of the image.
 }
 \description{
 Given the paths to one or more files, reads and converts
 them into a \code{captcha} list that can be used for modeling or
-prediction. If \code{lab_in_path = TRUE}, will take the label for the
-Captchas from their filenames and get them ready for modeling.
+prediction. If \code{lab_in_path=TRUE}, will take the label for the
+Captchas from their filenames using \verb{_} as the separator.
+}
+\details{
+The \code{read_captcha()} function reads a character vector of image files and
+stores them in memory. Behind the scenes, the function uses the
+\href{https://docs.ropensci.org/magick/}{\code{{magick}}} package to deal with
+the types of files that may appear (JPEG, PNG, among others).
+}
+\examples{
+
+captcha_file <- system.file("examples/captcha/esaj.png", package = "captcha")
+cap <- read_captcha(captcha_file)
+cap
+
 }
