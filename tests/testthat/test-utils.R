@@ -9,8 +9,9 @@ test_that("print captcha as expected", {
 
 # from the testthat documentation
 save_png <- function(code, width = 400, height = 400) {
+  set.seed(42)
   path <- tempfile(fileext = ".png")
-  png(path, width = width, height = height)
+  grDevices::png(path, width = width, height = height)
   on.exit(dev.off())
   code
   path
