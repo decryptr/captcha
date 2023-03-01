@@ -16,6 +16,25 @@ test_that("creates folder and annotated file", {
   expect_match(result, "_lala")
 })
 
+test_that("prompt", {
+
+  f_captcha <- test_path("examples/tjpe.png")
+
+  # create local dir and delete it
+  tmp_dir <- withr::local_tempdir()
+  fs::dir_delete(tmp_dir)
+
+  f <- file()
+  write("lala", f)
+
+  # now we annotate and verify if the directory and file exist
+  result <- captcha_annotate(f_captcha, labels = f, path = tmp_dir)
+
+  expect_true(fs::dir_exists(tmp_dir))
+  expect_true(fs::file_exists(result))
+  expect_match(result, "_lala")
+})
+
 test_that("vector of labels works", {
   f_captcha <- rep(test_path("examples/tjpe.png"), 2)
 

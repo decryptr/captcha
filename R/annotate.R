@@ -1,14 +1,14 @@
 #' @title Annotate captchas with their labels
 #'
 #' @description Given one or more Captchas, this function
-#' prompts the user to solve them mannually to train a model.
+#' prompts the user to solve them manually to train a model.
 #' Annotated captchas are saved at `path`
 #' with their labels in the filename separated by an underscore.
 #'
 #' @param files Either an object of class `captcha` or a character vector
 #'   with the paths to captcha files
-#' @param labels Either `NULL` (for interactive classification) or
-#'   a character vector with labels for the Captchas. See details.
+#' @param labels Either `stdin()` (the default, for interactive classification)
+#'   or a character vector with labels for the Captchas. See details.
 #' @param path Where to save the annotated captcha files.
 #'   If `NULL`, saves the files in the same folder the unanswered counterparts.
 #' @param rm_old Whether or not to delete unanswered captchas after
@@ -26,7 +26,7 @@
 #'
 #' @export
 captcha_annotate <- function(files,
-                             labels = NULL,
+                             labels = stdin(),
                              path = NULL,
                              rm_old = FALSE) {
 
@@ -39,7 +39,7 @@ captcha_annotate <- function(files,
     fs::dir_create(path)
   }
 
-  if (!is.null(labels)) {
+  if (length(labels) != 1 || !"connection" %in% class(labels)) {
 
     # Stop if labels don't match captchas
     stopifnot(length(labels) == length(files))
@@ -58,7 +58,7 @@ captcha_annotate <- function(files,
     files <- purrr::map_chr(
       files,
       captcha_annotate_one,
-      lab = NULL,
+      lab = labels,
       path = path,
       rm_old = rm_old
     )
@@ -73,9 +73,10 @@ captcha_annotate_one <- function(cap, lab, path, rm_old) {
   cap_ <- read_captcha(cap)
 
   # If interactive, prompt for label
-  if (is.null(lab)) {
+  if ("connection" %in% class(lab)) {
     plot.captcha(cap_)
-    lab <- readline("Label: ")
+    cat("Label: ")
+    lab <- readLines(lab, n = 1)
   }
 
   # Get information about where the file should be saved
