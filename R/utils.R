@@ -115,14 +115,14 @@ plot.captcha <- function(x, y, ...) {
   op <- graphics::par(no.readonly = TRUE)
   graphics::par(mar = rep(0, 4L))
   if (length(img) > 1) {
-    img |>
-      magick::image_border(color = "white", geometry = "5x5") |>
-      magick::image_montage(
-        tile = stringr::str_glue("{columns}x{rows}"),
-        geometry = stringr::str_glue(
-          "{getOption('captcha.print.height')}x0+0+0"
-        )
-      ) |>
+    append <- function(ii, img) {
+      magick::image_append(
+        img[((ii-1)*columns+1):(min(ii*columns, length(img)))]
+      )
+    }
+    purrr::map(seq_len(rows), append, img) |>
+      magick::image_join() |>
+      magick::image_append(TRUE) |>
       graphics::plot()
   } else {
     graphics::plot(img)

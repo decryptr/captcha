@@ -118,7 +118,6 @@ captcha_generate <- function(write_disk = FALSE,
     magick::image_trim() |>
     magick::image_resize(stringr::str_glue("{n_cols}x{n_rows}"))
 
-
   if (stats::runif(1) < p_implode) {
     m_text <- magick::image_implode(m_text, factor = stats::runif(1, 0, .4))
   }

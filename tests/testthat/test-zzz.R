@@ -18,9 +18,10 @@ test_that("ghostscript works", {
 
   if (has_ghostscript) {
     expect_true(check_magick_ghostscript())
-  } else {
-    expect_error(check_magick_ghostscript())
-    expect_false(check_magick_ghostscript(error = FALSE))
   }
+  expect_error(check_magick_ghostscript(TRUE, TRUE))
+  expect_message(expect_false(
+    check_magick_ghostscript(FALSE, TRUE)
+  ), "ImageMagick")
 
 })

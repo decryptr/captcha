@@ -6,9 +6,10 @@ utils::globalVariables(c("super"))
   options(captcha.print.height = 150)
 }
 
-check_magick_ghostscript <- function(error = TRUE) {
+check_magick_ghostscript <- function(error = TRUE,
+                                     test_error_message = FALSE) {
   has_ghostscript <- magick::magick_config()$ghostscript
-  if (!has_ghostscript) {
+  if (!has_ghostscript || test_error_message) {
     message <- paste(
       "This package needs ImageMagick with ghostscript enabled",
       "to run captcha_generate() and plot.captcha() functions.",
@@ -18,7 +19,7 @@ check_magick_ghostscript <- function(error = TRUE) {
       "https://docs.ropensci.org/magick/#installation.",
       sep = "\n"
     )
-    if (error) stop(message)
+    if (error) stop(message) else message(message)
 
     return(invisible(FALSE))
   }

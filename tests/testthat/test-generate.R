@@ -17,7 +17,28 @@ test_that("generate rcaptcha, save", {
 test_that("generate rcaptcha, don't save", {
 
   if (check_magick_ghostscript(error = FALSE)) {
+    set.seed(1)
     rcaptcha <- captcha_generate(write_disk = FALSE)
+    expect_s3_class(rcaptcha, "captcha")
+    expect_null(rcaptcha$path)
+    expect_type(rcaptcha$lab, "character")
+  } else {
+    expect_error(captcha_generate(write_disk = FALSE))
+  }
+
+})
+
+test_that("random effects work", {
+
+  if (check_magick_ghostscript(error = FALSE)) {
+    set.seed(1)
+    rcaptcha <- captcha_generate(
+      write_disk = FALSE,
+      p_implode = 1,
+      p_oilpaint = 1,
+      p_noise = 1,
+      p_lat = 1
+    )
     expect_s3_class(rcaptcha, "captcha")
     expect_null(rcaptcha$path)
     expect_type(rcaptcha$lab, "character")
