@@ -37,9 +37,9 @@ Currently, available models are:
 \itemize{
 \item \href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5}:
 Tribunal Regional Federal 5
-\item \href{https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&numero=1&listaProcessos=50718889720218130024&btn_pesquisar=Pesquisar}{tjmg}:
+\item \href{https://www4.tjmg.jus.br/juridico/sf/captcha.svl}{tjmg}:
 Tribunal de Justiça de Minas Gerais
-\item \href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}:
+\item \href{https://pje-consulta.trt3.jus.br/consultaprocessual/}{trt}:
 Tribunal Regional do Trabalho 3
 \item \href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj}:
 Tribunal de Justiça da Bahia
@@ -49,9 +49,9 @@ Junta Comercial de São Paulo
 Tribunal de Justiça de Pernambuco
 \item \href{https://www.tjrs.jus.br/site_php/consulta/verificador.php}{tjrs}:
 Tribunal de Justiça do Rio Grande do Sul
-\item \href{https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&acao_origem_externa=protocolo_pesquisar&id_orgao_acesso_externo=0}{sei}:
+\item \href{https://sei.economia.gov.br/infra_js/infra_gerar_captcha.php?codetorandom=112-53}{sei}:
 Sistema Eletrônico de Informações - ME
-\item \href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp}{rfb}:
+\item \href{https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/captcha/gerarCaptcha.asp}{rfb}:
 Receita Federal do Brasil
 }
 

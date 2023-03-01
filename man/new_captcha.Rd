@@ -4,11 +4,15 @@
 \alias{new_captcha}
 \title{Create a new project to solve a new Captcha}
 \usage{
-new_captcha(path)
+new_captcha(path, rstudio = TRUE, open = rstudio)
 }
 \arguments{
 \item{path}{A path. If it exists, it is used. If it does not exist,
 it is created, provided that the parent path exists.}
+
+\item{rstudio}{Use RStudio? Defaults to \code{TRUE}.}
+
+\item{open}{Open new RStudio project? Defaults to \code{rstudio}.}
 }
 \value{
 Single logical value indicating if current session is modified.

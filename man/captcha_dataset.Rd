@@ -44,21 +44,17 @@ It loads all the images in torch tensors, as well as the labels.
 }
 \examples{
 
-if (!torch::torch_is_installed()) {
-  torch::install_torch()
+if (torch::torch_is_installed()) {
+  annotated_folder <- system.file(
+    "examples/annotated_captcha",
+    package = "captcha"
+  )
+  suppressMessages({
+    ds <- captcha_dataset(annotated_folder)
+  })
+  # gets the first item (the only item in the example)
+  # returns a list with x and y torch tensors.
+  ds$.getitem(1)
 }
-
-annotated_folder <- system.file(
-  "examples/annotated_captcha",
-  package = "captcha"
-)
-
-suppressMessages({
-  ds <- captcha_dataset(annotated_folder)
-})
-
-# gets the first item (the only item in the example)
-# returns a list with x and y torch tensors.
-ds$.getitem(1)
 
 }

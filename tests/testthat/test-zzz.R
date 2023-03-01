@@ -21,3 +21,16 @@ test_that("skip if knitr", {
   expect_true(skip_if_knitr())
 
 })
+
+test_that("ghostscript works", {
+
+  has_ghostscript <- magick::magick_config()$ghostscript
+
+  if (has_ghostscript) {
+    expect_true(check_magick_ghostscript())
+  } else {
+    expect_error(check_magick_ghostscript())
+    expect_false(check_magick_ghostscript(error = FALSE))
+  }
+
+})

@@ -26,9 +26,9 @@
 #
 #' * [trf5](https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam):
 #'   Tribunal Regional Federal 5
-#' * [tjmg](https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&numero=1&listaProcessos=50718889720218130024&btn_pesquisar=Pesquisar):
+#' * [tjmg](https://www4.tjmg.jus.br/juridico/sf/captcha.svl):
 #'   Tribunal de Justiça de Minas Gerais
-#' * [trt](https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879):
+#' * [trt](https://pje-consulta.trt3.jus.br/consultaprocessual/):
 #'   Tribunal Regional do Trabalho 3
 #' * [esaj](http://esaj.tjba.jus.br/cpopg/open.do):
 #'   Tribunal de Justiça da Bahia
@@ -38,9 +38,9 @@
 #'   Tribunal de Justiça de Pernambuco
 #' * [tjrs](https://www.tjrs.jus.br/site_php/consulta/verificador.php):
 #'   Tribunal de Justiça do Rio Grande do Sul
-#' * [sei](https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&acao_origem_externa=protocolo_pesquisar&id_orgao_acesso_externo=0):
+#' * [sei](https://sei.economia.gov.br/infra_js/infra_gerar_captcha.php?codetorandom=112-53):
 #'   Sistema Eletrônico de Informações - ME
-#' * [rfb](https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp):
+#' * [rfb](https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/captcha/gerarCaptcha.asp):
 #'   Receita Federal do Brasil
 #'
 #' This list may be updated when new models are added to the release.

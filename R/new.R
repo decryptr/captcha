@@ -6,6 +6,8 @@
 #'
 #' @param path A path. If it exists, it is used. If it does not exist,
 #'   it is created, provided that the parent path exists.
+#' @param rstudio Use RStudio? Defaults to `TRUE`.
+#' @param open Open new RStudio project? Defaults to `rstudio`.
 #'
 #' @details
 #'
@@ -34,12 +36,12 @@
 #' @return Single logical value indicating if current session is modified.
 #'
 #' @export
-new_captcha <- function(path) {
+new_captcha <- function(path, rstudio = TRUE, open = rstudio) {
   template <- system.file("template", package = "captcha")
   fs::dir_copy(template, path)
   usethis::proj_set(path, TRUE)
-  usethis::use_rstudio()
-  usethis::proj_activate(path)
+  if (rstudio) usethis::use_rstudio()
+  if (open) usethis::proj_activate(path)
 }
 
 # used in RStudio GUI

@@ -22,13 +22,11 @@ labels must have the same length.
 }
 \examples{
 
-if (!torch::torch_is_installed()) {
-  torch::install_torch()
+if (torch::torch_is_installed()) {
+  vocab <- letters
+  resp <- captcha_transform_label(c("a","b","c","d","e"), vocab)
+  class(resp)
+  dim(resp)
 }
-
-vocab <- letters
-resp <- captcha_transform_label(c("a","b","c","d","e"), vocab)
-class(resp)
-dim(resp)
 
 }

@@ -12,17 +12,14 @@
 #'
 #' @examples
 #'
-#' if (!torch::torch_is_installed()) {
-#'   torch::install_torch()
+#' if (torch::torch_is_installed()) {
+#'   captcha_file <- fs::dir_ls(
+#'     system.file("examples/captcha/", package = "captcha"
+#'   ))
+#'   result <- captcha_transform_image(captcha_file)
+#'   class(result)
+#'   dim(result)
 #' }
-#'
-#' captcha_file <- fs::dir_ls(
-#'   system.file("examples/captcha/", package = "captcha"
-#' ))
-#'
-#' result <- captcha_transform_image(captcha_file)
-#' class(result)
-#' dim(result)
 #'
 #' @export
 captcha_transform_image <- function(x, input_dim = c(32L, 192L)) {
@@ -56,14 +53,12 @@ adjust_dimensions <- function(img) {
 #'
 #' @examples
 #'
-#' if (!torch::torch_is_installed()) {
-#'   torch::install_torch()
+#' if (torch::torch_is_installed()) {
+#'   vocab <- letters
+#'   resp <- captcha_transform_label(c("a","b","c","d","e"), vocab)
+#'   class(resp)
+#'   dim(resp)
 #' }
-#'
-#' vocab <- letters
-#' resp <- captcha_transform_label(c("a","b","c","d","e"), vocab)
-#' class(resp)
-#' dim(resp)
 #'
 #' @export
 captcha_transform_label <- function(all_letters, vocab) {
@@ -117,22 +112,18 @@ captcha_transform_label <- function(all_letters, vocab) {
 #'
 #' @examples
 #'
-#' if (!torch::torch_is_installed()) {
-#'   torch::install_torch()
+#' if (torch::torch_is_installed()) {
+#'   annotated_folder <- system.file(
+#'     "examples/annotated_captcha",
+#'     package = "captcha"
+#'   )
+#'   suppressMessages({
+#'     ds <- captcha_dataset(annotated_folder)
+#'   })
+#'   # gets the first item (the only item in the example)
+#'   # returns a list with x and y torch tensors.
+#'   ds$.getitem(1)
 #' }
-#'
-#' annotated_folder <- system.file(
-#'   "examples/annotated_captcha",
-#'   package = "captcha"
-#' )
-#'
-#' suppressMessages({
-#'   ds <- captcha_dataset(annotated_folder)
-#' })
-#'
-#' # gets the first item (the only item in the example)
-#' # returns a list with x and y torch tensors.
-#' ds$.getitem(1)
 #'
 #' @export
 captcha_dataset <- torch::dataset(
