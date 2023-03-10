@@ -139,7 +139,7 @@
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">captchas</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_captcha.html">read_captcha</a></span><span class="op">(</span><span class="va">examples</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">captchas</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/fig-example-plot-multi-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/fig-example-plot-multi-1.png" width="70%" height="100px" style="display: block; margin: auto;"></p>
 <p>By default, the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function arranges the images into four columns. To change the default, one can modify the options using <code>options(captcha.print.cols = N)</code>, where <code>N</code> is the desired number of columns. The next image shows an example with two columns.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>captcha.print.cols <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -353,6 +353,16 @@
 <p>Once the premises of the classified base are met, it is possible to fit a neural network model using the <a href="https://github.com/decryptr/captcha" class="external-link">captcha</a> package. However, the training step involves many small adaptations, it was decided to export functions in two depth levels. To address that, the <a href="https://github.com/decryptr/captcha" class="external-link">captcha</a> package also provides a <strong>procedural</strong> approach to fit the model, using a step-by-step described in the <a href="https://decryptr.github.io/captcha/articles/advanced.html">advanced guide</a>.</p>
 </div>
 <div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>One can contribute to the package through <a href="https://github.com/decryptr/captcha/pulls" class="external-link">pull requests</a> and report problems or ask questions at the <a href="https://github.com/decryptr/captcha/issues" class="external-link">issues section</a>. See the CONTRIBUTING.md file for detailed instructions.</p>
+</div>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the captcha project is released with a <a href="https://decryptr.github.io/captcha/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+<div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
 <p>MIT</p>
@@ -374,6 +384,13 @@
 </ul>
 </div>
 
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
@@ -392,7 +409,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://app.codecov.io/gh/decryptr/captcha?branch=master" class="external-link"><img src="https://codecov.io/gh/decryptr/captcha/branch/master/graph/badge.svg" alt="Code coverage"></a></li>
 <li><a href="https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://CRAN.R-project.org/package=captcha" class="external-link"><img src="https://www.r-pkg.org/badges/version/captcha" alt="CRAN status"></a></li>
