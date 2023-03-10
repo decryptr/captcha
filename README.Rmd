@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 # captcha <img src="man/figures/hex_small.png" align="right" />
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Code coverage](https://codecov.io/gh/decryptr/captcha/branch/master/graph/badge.svg)](https://app.codecov.io/gh/decryptr/captcha?branch=master)
 [![R-CMD-check](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/captcha)](https://CRAN.R-project.org/package=captcha)
@@ -100,6 +100,7 @@ An interesting aspect of the `plot()` function is that it deals with a list of C
 #| label: fig-example-plot-multi
 #| echo: true
 #| out-width: 70%
+#| out-height: 100px
 examples <- paste0("man/figures/", c(
   "dados_tjmg.jpeg",
   "dados_esaj.png",
@@ -302,6 +303,14 @@ Fitting a new Captcha model can be challenging. To help with that, the `{captcha
 ## Advanced usage
 
 Once the premises of the classified base are met, it is possible to fit a neural network model using the `{captcha}` package. However, the training step involves many small adaptations, it was decided to export functions in two depth levels. To address that, the `{captcha}` package also provides a **procedural** approach to fit the model, using a step-by-step described in the [advanced guide](https://decryptr.github.io/captcha/articles/advanced.html).
+
+## Contributing
+
+One can contribute to the package through [pull requests](https://github.com/decryptr/captcha/pulls) and report problems or ask questions at the [issues section](https://github.com/decryptr/captcha/issues). See the CONTRIBUTING.md file for detailed instructions.
+
+## Code of Conduct
+  
+  Please note that the captcha project is released with a [Contributor Code of Conduct](https://decryptr.github.io/captcha/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ## License
 

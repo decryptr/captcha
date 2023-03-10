@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Code
 coverage](https://codecov.io/gh/decryptr/captcha/branch/master/graph/badge.svg)](https://app.codecov.io/gh/decryptr/captcha?branch=master)
 [![R-CMD-check](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml)
@@ -123,7 +123,7 @@ captchas <- read_captcha(examples)
 plot(captchas)
 ```
 
-<img src="man/figures/fig-example-plot-multi-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="man/figures/fig-example-plot-multi-1.png" width="70%" height="100px" style="display: block; margin: auto;" />
 
 By default, the `plot()` function arranges the images into four columns.
 To change the default, one can modify the options using
@@ -345,6 +345,21 @@ functions in two depth levels. To address that, the `{captcha}` package
 also provides a **procedural** approach to fit the model, using a
 step-by-step described in the [advanced
 guide](https://decryptr.github.io/captcha/articles/advanced.html).
+
+## Contributing
+
+One can contribute to the package through [pull
+requests](https://github.com/decryptr/captcha/pulls) and report problems
+or ask questions at the [issues
+section](https://github.com/decryptr/captcha/issues). See the
+CONTRIBUTING.md file for detailed instructions.
+
+## Code of Conduct
+
+Please note that the captcha project is released with a [Contributor
+Code of
+Conduct](https://decryptr.github.io/captcha/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.
 
 ## License
 
