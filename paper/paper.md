@@ -102,16 +102,16 @@ There are several fitted models for the different Captchas accessible through th
 
 |Name   |Example             |Description                                         |Accuracy |
 |:------|:-------------------|:---------------------------------------------------|:--------|
-|cadesp |![cadesp](dados_cadesp.jpg){width=110px}|Centro de Apoio ao Desenvolvimento da Saude Publica |96.37%   |
-|esaj   |![esaj](dados_esaj.png){width=110px}|Tribunal de Justica da Bahia                        |94.50%   |
-|jucesp |![jucesp](dados_jucesp.jpg){width=110px}|Junta Comercial de Sao Paulo                        |89.88%   |
-|rfb    |![rfb](dados_rfb.png){width=110px}|Receita Federal                                     |95.70%   |
-|sei    |![sei](dados_sei.png){width=110px}|Sistema Eletronico de Informacoes - ME              |77.25%   |
-|tjmg   |![tjmg](dados_tjmg.jpeg){width=110px}|Tribunal de Justica de Minas Gerais                 |98.35%   |
-|tjpe   |![tjpe](dados_tjpe.png){width=110px}|Tribunal de Justica de Pernambuco                   |91.88%   |
-|tjrs   |![tjrs](dados_tjrs.jpg){width=110px}|Tribunal de Justica do Rio Grande do Sul            |99.57%   |
-|trf5   |![trf5](dados_trf5.jpg){width=110px}|Tribunal Regional Federal 5                         |98.77%   |
-|trt    |![trt](dados_trt.jpeg){width=110px}|Tribunal Regional do Trabalho 3                     |98.50%   |
+|cadesp |![cadesp](dados_cadesp.jpg){height=80px}|Centro de Apoio ao Desenvolvimento da Saude Publica |96.37%   |
+|esaj   |![esaj](dados_esaj.png){height=80px}|Tribunal de Justica da Bahia                        |94.50%   |
+|jucesp |![jucesp](dados_jucesp.jpg){height=80px}|Junta Comercial de Sao Paulo                        |89.88%   |
+|rfb    |![rfb](dados_rfb.png){height=80px}|Receita Federal                                     |95.70%   |
+|sei    |![sei](dados_sei.png){height=80px}|Sistema Eletronico de Informacoes - ME              |77.25%   |
+|tjmg   |![tjmg](dados_tjmg.jpeg){height=80px}|Tribunal de Justica de Minas Gerais                 |98.35%   |
+|tjpe   |![tjpe](dados_tjpe.png){height=80px}|Tribunal de Justica de Pernambuco                   |91.88%   |
+|tjrs   |![tjrs](dados_tjrs.jpg){height=80px}|Tribunal de Justica do Rio Grande do Sul            |99.57%   |
+|trf5   |![trf5](dados_trf5.jpg){height=80px}|Tribunal Regional Federal 5                         |98.77%   |
+|trt    |![trt](dados_trt.jpeg){height=80px}|Tribunal Regional do Trabalho 3                     |98.50%   |
 
 # Custom model
 
