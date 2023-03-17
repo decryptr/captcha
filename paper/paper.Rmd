@@ -48,7 +48,8 @@ The basic usage of `{captcha}` involves the functions `read_captcha()`, `plot()`
 #| fig-align: center
 #| echo: false
 #| out-width: 90%
-knitr::include_graphics("diagram.png")
+#| dev: png
+knitr::include_graphics("diagram.png", auto_pdf = FALSE)
 ```
 
 The `read_captcha()` function reads a character vector of image files and stores them in memory. Behind the scenes, the function uses the [`{magick}`](https://docs.ropensci.org/magick/) [@magick] package to deal with the types of files that may appear (JPEG, PNG, among others).
@@ -57,8 +58,9 @@ The `read_captcha()` function reads a character vector of image files and stores
 #| label: fig-example-plot-inicial
 #| echo: true
 #| out-width: 0%
+#| dev: png
 library(captcha)
-example <- "dados_tjmg.jpeg"
+example <- system.file("examples/captcha/tjmg.jpeg", package = "captcha")
 captcha <- read_captcha(example)
 captcha
 ```
@@ -71,27 +73,29 @@ The `plot()` function is a method of [class S3](https://adv-r.hadley.nz/s3.html)
 #| label: fig-example-plot
 #| echo: true
 #| out-width: 30%
-example <- "dados_tjmg.jpeg"
+#| dev: png
+example <- system.file("examples/captcha/tjmg.jpeg", package = "captcha")
 captcha <- read_captcha(example)
 plot(captcha)
 ```
 
 The `captcha_annotate()` function annotates a Captcha image, either manually or automatically. It modifies the image path and adds the text `_label` to the end of the file path.  The function returns a vector with the paths of the modified files. The `labels=` parameter can handle situations where one knows the Captcha label. For example, a workflow that uses an oracle might provide the label automatically. When the label doesn't exist, the `captcha_annotate()` function opens the prompt for classification and shows the image using `plot()`. 
 
-The `decrypt()` function returns a label for an image using a fitted model. The function takes two arguments: `file=`, which can be either the file path or a captcha class object, and `model=`, which contains an object of class luz_module_fitted, fitted using the [{luz}](https://mlverse.github.io/luz/) package.
+The `decrypt()` function returns a label for an image using a fitted model. The function takes two arguments: `file=`, which can be either the file path or a captcha class object, and `model=`, which contains an object of class luz_module_fitted, fitted using the [{luz}](https://mlverse.github.io/luz/) package [@luz].
 
 ```{r}
 #| label: fig-example-decrypt
 #| out-width: 30%
 #| message: false
+#| dev: png
 model <- captcha_load_model("cadesp")
-img <- "dados_cadesp.jpg"
+img <- system.file("examples/captcha/cadesp.jpg", package = "captcha")
 captcha <- read_captcha(img)
 plot(captcha)
 decrypt(captcha, model)
 ```
 
-There are several fitted models for several different Captchas accessible through the `{captcha}` package. It is possible to load a trained model using the `captcha_load_model()` function.  The `path=` parameter contains either the path for a fitted model or a string with the name of a released model, like `"rfb"`. Fitted models are stored in the `{captcha}` package repository releases, which can be downloaded using the [`{piggyback}` package](https://docs.ropensci.org/piggyback/) [@Boettiger2018]. Currently, the Captchas with available fitted models are `trf5`, `tjmg`, `trt`, `esaj`, `jucesp`, `tjpe`, `tjrs`, `cadesp`, `sei` and ` rfb`. The table below describes the models and their accuracy.
+There are several fitted models for the different Captchas accessible through the `{captcha}` package. It is possible to load a trained model using the `captcha_load_model()` function.  The `path=` parameter contains either the path for a fitted model or a string with the name of a released model, like `"rfb"`. Fitted models are stored in the `{captcha}` package repository releases, which can be downloaded using the [`{piggyback}` package](https://docs.ropensci.org/piggyback/) [@Boettiger2018]. Currently, the Captchas with available fitted models are `trf5`, `tjmg`, `trt`, `esaj`, `jucesp`, `tjpe`, `tjrs`, `cadesp`, `sei` and ` rfb`. The table below describes the models and their accuracy.
 
 ```{r}
 #| label: tbl-available-models
@@ -119,7 +123,7 @@ tibble::tribble(
 
 The `{captcha}` package provides a basic interface for fitting custom models from a fully labeled data. Annotation can be done manually using the `captcha_annotate()` function presented earlier or with another method developed by the user. The model uses a convolutional neural network architecture, similar to the LeNet-5 model [@lecun1995comparison].
 
-The `captcha_fit_model()` function fits a model from a folder with annotated images. It also has some parameters related to the neural network. The function returns a fitted model of class `luz_module_fitted` [@luz], which can be saved to disk using `luz_save()`.
+The `captcha_fit_model()` function fits a model from a folder with annotated images. It also has some parameters related to the neural network. The function returns a fitted model of class `luz_module_fitted`, which can be saved to disk using `luz_save()`.
 
 The training step of neural networks involves many small adaptations, it was decided to export functions in two depth levels. To address that, the `{captcha}` package also provides a **procedural** approach to fit the model, using a step-by-step described in the [advanced guide](https://decryptr.github.io/captcha/articles/advanced.html).
 
