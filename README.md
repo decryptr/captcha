@@ -12,7 +12,6 @@ coverage](https://codecov.io/gh/decryptr/captcha/branch/master/graph/badge.svg)]
 [![R-CMD-check](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/decryptr/captcha/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/captcha)](https://CRAN.R-project.org/package=captcha)
-[![status](https://joss.theoj.org/papers/027aba13cdc52465145959e84637bd56/status.svg)](https://joss.theoj.org/papers/027aba13cdc52465145959e84637bd56)
 <!-- badges: end -->
 
 This package is an extensible API to build models and solve Captchas
